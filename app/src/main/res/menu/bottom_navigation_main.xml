@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/tab_main_pager"
+        android:enabled="true"
+        android:icon="@drawable/homepager_selector"
+        android:title="@string/home_pager"
+        app:showAsAction="ifRoom" />
+
+    <item
+        app:showAsAction="ifRoom"
+        android:id="@+id/tab_classfiy"
+        android:icon="@drawable/hangqing_selector"
+        android:title="@string/hangqing" />
+    <item
+        android:id="@+id/tab_tiku"
+        android:enabled="true"
+        android:icon="@drawable/heyue_selector"
+        android:title="@string/heyue"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/tab_mine"
+        android:enabled="true"
+        android:icon="@drawable/mine_selector"
+        android:title="@string/mine"
+        app:showAsAction="ifRoom" />
+
+</menu>

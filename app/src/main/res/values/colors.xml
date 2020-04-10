@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#008577</color>
+    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorAccent">#D81B60</color>
+    <!--价格红-->
+    <color name="colorPriceRed">#54aa22</color>
+    <!--价格绿-->
+    <color name="colorPriceGreen">#F96A66</color>
+
+    <color name="white">#FFFFFFFF</color>
+
+    <color name="mainColor">#FFD31C</color>
+
+    <color name="gray">#ddd</color>
+    <color name="fff6f6f6">#fff6f6f6</color>
+
+    <color name="noSelecter">#484848</color>
+    <color name="black">#ff000000</color>
+    <color name="touming">#aa000000</color>
+    <color name="Color333333">#ff333333</color>
+    <color name="Color666666">#ff666666</color>
+    <color name="Color999999">#ff999999</color>
+    <color name="ColorF7F8FA">#F7F8FA</color>
+    <color name="ColorF0F0F0">#f0f0f0</color>
+    <color name="ColorAAAAAA">#ffAAAAAA</color>
+    <color name="ColorC8C8C8">#ffC8C8C8</color>
+    <color name="ColorDCDCDC">#ffDCDCDC</color>
+    <color name="Color68060E">#68060E</color>
+    <color name="ColorF6F6F6">#fff6f6f6</color>
+    <color name="ColorF5A623">#fff5a623</color>
+    <color name="ColorF7B64A">#fff7b64a</color>
+
+    <color name="bg_black">#ff000000</color>
+    <color name="dark_bg">#8000</color>
+    <color name="colorRed">#DB253B</color>
+
+    <color name="colorRed1">#AC2028</color>
+    <color name="colorRed2">#DB253B</color>
+    <color name="ColorWrong">#F6E3E3</color>
+    <color name="ColorRight">#E4F7EA</color>
+    <color name="ColorF1F1F1">#F1F1F1</color>
+    <color name="ColorEEEEEE">#EEEEEE</color>
+    <color name="ColorE1E1E1">#E1E1E1</color>
+
+
+</resources>

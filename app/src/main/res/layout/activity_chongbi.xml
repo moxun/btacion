@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F7F8FA"
+    android:orientation="vertical"
+    tools:context=".mine.activiity.ChongbiActivity">
+
+
+    <include
+        android:id="@+id/tool"
+
+        layout="@layout/public_title_bar" />
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_below="@+id/tool"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <RelativeLayout
+                android:id="@+id/re"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:layout_marginTop="@dimen/dp_8"
+                android:background="@color/white">
+
+
+                <TextView
+                    android:id="@+id/bi_type"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_20"
+                    android:layout_marginStart="@dimen/dp_15"
+                    android:text="USDT"
+                    android:textColor="#ff333333"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/choose_bi"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginTop="@dimen/dp_20"
+                    android:layout_marginEnd="@dimen/dp_20"
+                    android:layout_marginRight="2dp"
+                    android:drawableRight="@drawable/sanjiao"
+                    android:drawablePadding="@dimen/dp_5"
+                    android:text="@string/choose_bi"
+                    android:textColor="#ffa6b0bd"
+                    android:textSize="14sp" />
+
+                <View
+                    android:id="@+id/fenge"
+                    android:layout_marginTop="@dimen/dp_20"
+                    android:layout_below="@+id/choose_bi"
+                    android:background="#EEEEEE"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_1"/>
+
+
+                <ImageView
+                    android:id="@+id/erweima"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="@dimen/dp_30"
+                    android:layout_below="@+id/fenge"
+                    android:layout_width="154dp"
+                    android:layout_height="154dp"
+                    android:src="@color/black"
+                    />
+
+
+                <RelativeLayout
+                    android:layout_marginBottom="@dimen/dp_20"
+                    android:layout_marginTop="@dimen/dp_30"
+                    android:layout_below="@+id/erweima"
+                    android:background="@drawable/gray_learn_10"
+                    android:layout_marginEnd="@dimen/dp_20"
+                    android:layout_marginStart="@dimen/dp_20"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_50">
+
+
+                    <TextView
+                        android:layout_marginStart="@dimen/dp_10"
+                        android:layout_centerVertical="true"
+                        android:layout_width="@dimen/dp_266"
+                        android:maxWidth="@dimen/dp_280"
+                        android:layout_height="wrap_content"
+                        android:text="0SDIACJISFscmxiccu8svus8xvys8dy8sx7yc8a77"
+                        android:textColor="#ff333333"
+                        android:textSize="12sp"
+                        />
+                    <View
+                        android:layout_marginEnd="@dimen/dp_15"
+                        android:layout_toLeftOf="@+id/copy"
+                        android:id="@+id/heyue_back"
+
+                        android:layout_marginStart="@dimen/dp_15"
+
+                        android:background="#999999"
+                        android:layout_width="@dimen/dp_1"
+                        android:layout_height="match_parent"
+                        tools:ignore="UnknownIdInLayout" />
+                    <TextView
+                        android:id="@+id/copy"
+                        android:layout_marginEnd="@dimen/dp_15"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/copy"
+                        android:textColor="#ffffd31c"
+                        android:textSize="12sp"
+                        />
+
+                </RelativeLayout>
+            </RelativeLayout>
+
+
+
+
+
+            <TextView
+                android:id="@+id/chongbi_hint"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dp_15"
+                android:layout_marginTop="@dimen/dp_20"
+                android:text="@string/chongbi_hint"
+                android:textColor="#ff333333"
+                android:textSize="14sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dp_15"
+                android:layout_marginTop="@dimen/sp_16"
+                android:layout_marginEnd="@dimen/dp_15"
+                android:lineSpacingExtra="@dimen/dp_10"
+                android:text="@string/chongbi_hi"
+                android:textColor="#ff999999"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/next_do"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_45"
+                android:layout_marginStart="@dimen/dp_15"
+                android:layout_marginEnd="@dimen/dp_15"
+                android:layout_marginBottom="@dimen/dp_30"
+                android:layout_marginTop="@dimen/dp_10"
+                android:background="@drawable/yellowback_radio10"
+                android:gravity="center"
+                android:text="@string/add_money"
+                android:textColor="#ffffffff"
+                android:textSize="@dimen/sp_15" />
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+</LinearLayout>

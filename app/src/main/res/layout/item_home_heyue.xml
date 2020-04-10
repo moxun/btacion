@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:background="@color/white"
+    android:layout_height="@dimen/dp_50">
+
+    <LinearLayout
+        android:id="@+id/ll_re"
+
+        android:orientation="horizontal"
+
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_50">
+
+        <RelativeLayout
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/dp_50">
+
+
+            <TextView
+
+                android:id="@+id/text_1_bi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="LTC"
+                android:textColor="#ff333333"
+                android:textSize="14sp"
+                />
+            <TextView
+                android:layout_toRightOf="@+id/text_1_bi"
+                android:layout_alignBottom ="@+id/text_1_bi"
+                android:id="@+id/text_2_bi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="/LTC"
+                android:textColor="#999999"
+                android:textSize="@dimen/sp_12"
+                />
+            <TextView
+                android:layout_below="@+id/text_1_bi"
+                android:id="@+id/text_3_bi"
+                android:layout_marginTop="@dimen/dp_8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="24H量 73,144"
+                android:textColor="#ff999999"
+                android:textSize="12sp"
+                />
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/dp_50">
+
+
+            <TextView
+
+                android:id="@+id/text_4_bi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="LTC"
+                android:textColor="#ff333333"
+                android:textSize="14sp"
+                />
+
+            <TextView
+                android:layout_below="@+id/text_4_bi"
+                android:id="@+id/text_5_bi"
+                android:layout_marginTop="@dimen/dp_8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="24H量 73,144"
+                android:textColor="#ff999999"
+                android:textSize="12sp"
+                />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/dp_50">
+
+            <TextView
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:gravity="center"
+                android:background="@drawable/lanse_bg_3"
+                android:layout_width="@dimen/dp_68"
+                android:layout_height="@dimen/dp_30"
+                android:text="+2.19%"
+                android:textColor="#ff333333"
+                android:textSize="14sp"
+                />
+        </RelativeLayout>
+
+    </LinearLayout>
+    <View
+        android:background="#EEEEEE"
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_0_5"/>
+</RelativeLayout>

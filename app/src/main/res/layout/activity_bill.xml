@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F7F8FA"
+    android:orientation="vertical"
+    tools:context=".mine.activiity.NoticeActivity">
+
+    <RelativeLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/ll_toolbar"
+        android:background="@drawable/back_zhangdan"
+        android:orientation="horizontal">
+        <ImageButton
+            android:id="@+id/finish"
+            android:src="@drawable/icon_back"
+            android:layout_marginStart="@dimen/dp_10"
+            android:layout_marginTop="@dimen/dp_10"
+            android:layout_width="@dimen/dp_45"
+            android:background="@null"
+            android:layout_height="@dimen/dp_45" />
+        <TextView
+            android:id="@+id/tool_title"
+            android:maxLength="15"
+            android:layout_marginTop="@dimen/dp_20"
+            android:layout_centerHorizontal="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/mybill"
+            android:textColor="#ff333333"
+            android:textSize="@dimen/sp_17"
+            />
+
+        <TextView
+            android:id="@+id/text_bill"
+            android:layout_marginStart="@dimen/dp_20"
+            android:layout_marginTop="@dimen/dp_30"
+            android:layout_below="@+id/finish"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/mine_bill"
+            android:textColor="#ff333333"
+            android:textSize="20sp"
+            />
+
+        <TextView
+            android:layout_marginBottom="@dimen/dp_30"
+            android:layout_marginStart="@dimen/dp_20"
+            android:layout_marginTop="@dimen/dp_10"
+            android:layout_below="@+id/text_bill"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="笔笔往来明细看得见"
+            android:textColor="#ff333333"
+            android:textSize="12sp"
+            />
+    </RelativeLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+
+        android:id="@+id/recy_bill"
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </androidx.recyclerview.widget.RecyclerView>
+</LinearLayout>
