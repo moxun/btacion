@@ -50,7 +50,7 @@ public class ZgwApplication extends Application {
      * 根据后期服务器图片地址修改，故用此域名访问。
      */
     public static String appPictureUrl="http://vtsbank.oss-cn-hongkong.aliyuncs.com";
-
+    public static String socket="ws://bull.wanzhantong.cn/socket.io/?EIO=3&transport=websocket";
     /**
      * app下载地址
      */
@@ -89,6 +89,13 @@ public class ZgwApplication extends Application {
     private static long		mMainThreadId;
     private static Looper mMainThreadLooper;
 
+    public static String TYPE_1MINUTE="1min";
+    public static String TYPE_5MINUTE="5min";
+    public static String TYPE_30MINUTE="30min";
+    public static String TYPE_1HOURS="60min";
+    public static String TYPE_1DAY="1D";
+    public static String TYPE_1WEEK="1W";
+    public static String TYPE_1MONTH="1M";
 
     @Override
     protected void attachBaseContext(Context base) {

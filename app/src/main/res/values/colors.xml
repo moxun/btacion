@@ -9,14 +9,31 @@
     <color name="colorPriceGreen">#F96A66</color>
 
     <color name="white">#FFFFFFFF</color>
-
+    <color name="transparent_db">#E0DBDBDB</color>
     <color name="mainColor">#FFD31C</color>
 
     <color name="gray">#ddd</color>
     <color name="fff6f6f6">#fff6f6f6</color>
-
+    <color name="linecolor">#15000000</color>
+    <color name="chart_red">#26BF66</color>
+    <color name="chart_green">#FD6433</color>
+    <color name="chart_line">#700293d6</color>
+    <color name="chart_line_background">#300293d6</color>
+    <color name="chart_ma5">#DA8AE5</color>
+    <color name="chart_ma10">#39B0E8</color>
+    <color name="chart_ma30">#FFC76D</color>
+    <color name="chart_white">#ffffff</color>
+    <color name="chart_bac">#00FFFFFF</color>
+    <color name="chart_point_bac">#202326</color>
+    <color name="chart_grid_line">#cfd3e9</color>
+    <color name="chart_text">#818596</color>
+    <color name="chengse">#FD7755</color>
+    <color name="chart_selector">#202326</color>
+    <color name="lanse_s">#36C8A7</color>
     <color name="noSelecter">#484848</color>
     <color name="black">#ff000000</color>
+    <color name="k_textcolor">#90A3B0</color>
+    <color name="lanse">#00BF93</color>
     <color name="touming">#aa000000</color>
     <color name="Color333333">#ff333333</color>
     <color name="Color666666">#ff666666</color>

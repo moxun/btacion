@@ -13,7 +13,8 @@ import java.util.TimeZone;
  */
 
 public class DateUtil {
-
+    public static SimpleDateFormat DateFormat = new SimpleDateFormat("yyyy/MM/dd");
+    public static SimpleDateFormat shortTimeFormat = new SimpleDateFormat("HH:mm");
     public static String[] weekDays = {"星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"};
     /***
             * 获取当前java.util.Date型日期

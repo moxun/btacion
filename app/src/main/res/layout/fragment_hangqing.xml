@@ -1,14 +1,121 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/white"
     tools:context=".hangqing.fragment.HangqingFragment">
 
     <!-- TODO: Update blank fragment layout -->
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_10"
+        android:layout_gravity="center_horizontal"
+        android:text="@string/hangqing"
+        android:textColor="#ff333333"
+        android:textSize="17sp" />
 
-</FrameLayout>
+    <View
+
+        android:id="@+id/fenge"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_10"
+
+        android:layout_marginTop="@dimen/dp_11"
+        android:background="#F7F8FA" />
+    <RelativeLayout
+        android:id="@+id/ll_re"
+        android:layout_below="@+id/heyue_back"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_40">
+
+        <LinearLayout
+            android:id="@+id/lin_chengJiao"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/dp_15"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/text_cje"
+                android:textColor="@color/black"
+                android:textSize="@dimen/sp_12" />
+
+            <ImageView
+                android:id="@+id/image_chengJiao"
+                android:layout_width="@dimen/dp_10"
+                android:layout_height="@dimen/dp_10"
+                android:layout_gravity="center"
+                android:layout_marginLeft="@dimen/dp_3"
+                android:src="@drawable/image_hq_moren" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/lin_shiShi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/dp_100"
+            android:layout_toRightOf="@+id/lin_chengJiao"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/text_ssjg"
+                android:textColor="@color/black"
+                android:textSize="@dimen/sp_12" />
+
+            <ImageView
+                android:id="@+id/image_shiShi"
+                android:layout_width="@dimen/dp_10"
+                android:layout_height="@dimen/dp_10"
+                android:layout_gravity="center"
+                android:layout_marginLeft="@dimen/dp_3"
+                android:src="@drawable/image_hq_moren" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/lin_zhangDie"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/dp_15"
+            android:layout_centerVertical="true"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:textSize="@dimen/sp_12"
+                android:text="@string/text_zdf"/>
+
+            <ImageView
+                android:id="@+id/image_zhangDie"
+                android:layout_width="@dimen/dp_10"
+                android:layout_height="@dimen/dp_10"
+                android:src="@drawable/image_hq_moren"
+                android:layout_marginStart="@dimen/dp_3"
+                android:layout_gravity="center"/>
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recy_heyue"
+        android:layout_marginEnd="@dimen/dp_15"
+        android:layout_marginStart="@dimen/dp_15"
+        android:layout_marginBottom="@dimen/dp_8"
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </androidx.recyclerview.widget.RecyclerView>
+</LinearLayout>

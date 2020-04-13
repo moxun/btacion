@@ -47,7 +47,12 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".mine.activiity.MyTuiGuangActivity"></activity>
+        <activity android:name=".heyue.activiity.SySuccessActivity"></activity>
+        <activity android:name=".mine.activiity.HistoryActivity" />
+        <activity android:name=".Login.ForgrtPwdActivity" />
+        <activity android:name=".Login.RegisterActivity" />
+        <activity android:name=".Login.LoginActivity" />
+        <activity android:name=".mine.activiity.MyTuiGuangActivity" />
         <activity android:name=".mine.activiity.BillActivity" />
         <activity android:name=".mine.activiity.NoticeInfoActivity" />
         <activity android:name=".mine.activiity.NoticeActivity" />
@@ -56,6 +61,8 @@
         <activity android:name=".mine.activiity.ChongbiActivity" />
         <activity android:name=".mine.activiity.MyzichanActivity" />
         <activity android:name=".mine.activiity.EmailActivity" />
+        <activity android:name=".kline.AbActivity"></activity>
+        <activity android:name=".kline.KlineActivity" />
         <activity android:name=".mine.activiity.PhoneActivity" />
         <activity android:name=".mine.activiity.UpdateplaypsdActivity" />
         <activity android:name=".mine.activiity.AddradressActivity" />

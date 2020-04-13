@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="@dimen/dp_60"
+        android:layout_height="@dimen/dp_35">
+
+        <TextView
+            android:id="@+id/text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/dp_2"
+            android:autoSizeMaxTextSize="@dimen/sp_12"
+            android:autoSizeMinTextSize="@dimen/sp_10"
+            android:autoSizeTextType="uniform"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:maxLines="1"
+            android:text="@string/tab_fbz"
+            android:textColor="@drawable/tab_text_dingdan"
+            android:textSize="@dimen/sp_12" />
+
+        <TextView
+            android:id="@+id/text_bg"
+            android:layout_width="@dimen/dp_15"
+            android:layout_height="@dimen/dp_3"
+            android:background="@drawable/tab_dingdan_bg"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentBottom="true"/>
+    </RelativeLayout>
+
+</LinearLayout>

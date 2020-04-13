@@ -1,6 +1,7 @@
 package com.example.myapplication.base;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Build;
 import android.os.Bundle;
@@ -58,7 +59,45 @@ public abstract class BaseActivity extends AppCompatActivity {
         initData();
         initView();
     }
+    /**
+     * [页面跳转]
+     *
+     * @param clz
+     */
+    public void startActivity(Class<?> clz) {
+        startActivity(new Intent(this, clz));
+    }
 
+    /**
+     * 携带数据页面跳转
+     *
+     * @param clz
+     * @param bundle
+     */
+    public void startActivity(Class<?> clz, Bundle bundle) {
+        Intent intent = new Intent();
+        intent.setClass(this, clz);
+        if (bundle != null) {
+            intent.putExtras(bundle);
+        }
+        startActivity(intent);
+    }
+
+    /**
+     * 携带数据页面跳转并且有请求码
+     *
+     * @param cls
+     * @param bundle
+     * @param requestCode
+     */
+    public void startActivityForResult(Class<?> cls, Bundle bundle, int requestCode) {
+        Intent intent = new Intent();
+        intent.setClass(this, cls);
+        if (bundle != null) {
+            intent.putExtras(bundle);
+        }
+        startActivityForResult(intent, requestCode);
+    }
     public void chenjin(int color) {
         StatusBarUtil.setColor(BaseActivity.this, getResources().getColor(color), 0);
         StatusBarUtil.setRootViewFitsSystemWindows(this, true);

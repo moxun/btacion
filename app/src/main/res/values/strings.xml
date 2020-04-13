@@ -3,10 +3,21 @@
     <string name="packageName">com.example.myapplication</string>
     <string name="kkk">如果</string>
     <string name="home_pager">首页</string>
+    <string name="tab_fbz">发布中</string>
     <string name="heyue">合约</string>
     <string name="hangqing">行情</string>
     <string name="mine">我的</string>
-
+    <string name="text_mr">买入</string>
+    <string name="text_mc">卖出</string>
+    <string name="tab_zhibiao" translatable="false">指标  </string>
+    <string name="tab_fenshi">分时  </string>
+    <string name="tab_yifenzhong">1分钟</string>
+    <string name="tab_wufenzhong">5分钟</string>
+    <string name="tab_sanshifenzhong">30分钟</string>
+    <string name="tab_yixiaoshi">1小时</string>
+    <string name="tab_yizhou" translatable="false">1周  </string>
+    <string name="tab_yitian">1天  </string>
+    <string name="tab_yiyue">1月  </string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="noquanxian">未获取到权限</string>
@@ -114,5 +125,26 @@
     <string name="kefu">在线客服</string>
     <string name="helpcenter">帮助中心</string>
     <string name="btacionheyue">BTACOIN合约</string>
+    <string name="welcome_login">欢迎登录</string>
+    <string name="input_pws">请输入密码</string>
+    <string name="login">登录</string>
+    <string name="register">立即注册</string>
+    <string name="forget_pwd">忘记密码？</string>
+    <string name="phone_register">手机注册</string>
+    <string name="settings_pws">设置密码</string>
+    <string name="input_pwd_again">请再次输入密码</string>
+    <string name="yaoqing_code">邀请码（非必填）</string>
+    <string name="forget_pwd1">忘记密码</string>
+    <string name="text_kcjg">开仓价格</string>
+    <string name="text_bj">本金</string>
+    <string name="text_sx">手续费</string>
+    <string name="text_yk">盈亏</string>
+    <string name="text_pcj">平仓价</string>
+    <string name="text_pclx">平仓类型</string>
+    <string name="history_order">历史订单</string>
+    <string name="syl">收益率</string>
+    <string name="maidie">买跌</string>
+    <string name="now_jiage">当前价格</string>
+    <string name="zq_hint">轻松上手，全心交易！</string>
 
 </resources>
