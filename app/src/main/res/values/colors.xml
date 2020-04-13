@@ -59,6 +59,13 @@
     <color name="ColorF1F1F1">#F1F1F1</color>
     <color name="ColorEEEEEE">#EEEEEE</color>
     <color name="ColorE1E1E1">#E1E1E1</color>
-
-
+    <color name="hy_lan">#03A579</color>
+    <color name="hy_huise">#F5F5F5</color>
+    <color name="hy_cengse">#F65448</color>
+    <color name="hy_yellow">#FFD31C</color>
+    <color name="hy_qlan">#D4F1EC</color>
+    <color name="hy_qlantext">#03AD90</color>
+    <color name="hy_red">#F65448</color>
+    <color name="hy_redbg">#FBF1F0</color>
+    <color name="hy_lanbg">#E9FAF5</color>
 </resources>

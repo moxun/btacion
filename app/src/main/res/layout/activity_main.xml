@@ -19,7 +19,7 @@
         app:labelVisibilityMode="labeled"
 
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/dp_50"
         android:layout_gravity="bottom"
         android:background="@color/white"
         app:elevation="@dimen/dp_16"
