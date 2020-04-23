@@ -17,11 +17,13 @@
            android:layout_height="@dimen/dp_50">
 
            <ImageView
+               android:id="@+id/img_bitype"
                android:layout_gravity="center"
                android:src="@drawable/icon_mytibi"
                android:layout_width="@dimen/dp_22"
                android:layout_height="@dimen/dp_22" />
            <TextView
+               android:id="@+id/bi_name"
                android:layout_marginStart="@dimen/dp_10"
                android:layout_gravity="center"
                android:layout_width="wrap_content"
@@ -32,6 +34,7 @@
                />
        </LinearLayout>
         <TextView
+            android:id="@+id/zonge"
             android:gravity="center"
             android:layout_weight="1"
             android:layout_width="0dp"
@@ -41,6 +44,7 @@
             android:textSize="14sp"
             />
         <TextView
+            android:id="@+id/keyong"
             android:gravity="right"
             android:layout_weight="1"
             android:layout_width="0dp"

@@ -2,6 +2,7 @@ package com.example.myapplication.base;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 
 import android.os.IBinder;
@@ -25,6 +26,8 @@ import butterknife.ButterKnife;
 
 public abstract class BaseFragment extends Fragment {
     protected static Activity mActivity;
+    public LayoutInflater baseInflater;
+
     /**
      * 初始化视图
      */
@@ -67,6 +70,7 @@ public abstract class BaseFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View inflate = inflater.inflate(getLayoutId(), container, false);
         ButterKnife.bind(this, inflate);
+        baseInflater = LayoutInflater.from(mActivity);
         initView(inflate,savedInstanceState);
         initData();
         return inflate;
@@ -130,8 +134,44 @@ public abstract class BaseFragment extends Fragment {
         void onResponse();
     }
 
+    /**
+     * [页面跳转]
+     *
+     * @param clz
+     */
+    public void startActivity(Class<?> clz) {
+        startActivity(new Intent(mActivity, clz));
+    }
+    /**
+     * 携带数据页面跳转
+     *
+     * @param clz
+     * @param bundle
+     */
+    public void startActivity(Class<?> clz, Bundle bundle) {
+        Intent intent = new Intent();
+        intent.setClass(mActivity, clz);
+        if (bundle != null) {
+            intent.putExtras(bundle);
+        }
+        startActivity(intent);
+    }
 
-
+    /**
+     * 携带数据页面跳转并且有请求码
+     *
+     * @param cls
+     * @param bundle
+     * @param requestCode
+     */
+    public void startActivityForResult(Class<?> cls, Bundle bundle, int requestCode) {
+        Intent intent = new Intent();
+        intent.setClass(mActivity, cls);
+        if (bundle != null) {
+            intent.putExtras(bundle);
+        }
+        startActivityForResult(intent, requestCode);
+    }
 
     public interface PersonalInfoCallback{
         void onResponse();

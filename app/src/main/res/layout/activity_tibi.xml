@@ -7,315 +7,324 @@
     android:background="#F7F8FA"
     android:orientation="vertical"
     tools:context=".mine.activiity.ChongbiActivity">
-
-
-    <include
-        android:id="@+id/tool"
-
-        layout="@layout/public_title_bar" />
-
-    <RelativeLayout
-        android:id="@+id/re"
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_50"
-        android:layout_below="@+id/tool"
-        android:layout_marginTop="@dimen/dp_8"
-        android:background="@color/white">
-
-
-        <TextView
-            android:id="@+id/bi_type"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginStart="@dimen/dp_15"
-            android:text="USDT"
-            android:textColor="#ff333333"
-            android:textSize="14sp" />
-
-        <TextView
-            android:id="@+id/choose_bi"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginEnd="@dimen/dp_20"
-            android:layout_marginRight="2dp"
-            android:drawableRight="@drawable/sanjiao"
-            android:drawablePadding="@dimen/dp_5"
-            android:text="@string/choose_bi"
-            android:textColor="#ffa6b0bd"
-            android:textSize="14sp" />
-
-    </RelativeLayout>
-
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-
-        android:layout_height="@dimen/dp_50"
-        android:layout_marginTop="@dimen/dp_1"
-        android:background="@color/white">
-
-
-        <TextView
-
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginStart="@dimen/dp_15"
-            android:text="@string/address1"
-            android:textColor="#ff333333"
-            android:textSize="14sp" />
-
-
-        <ImageView
-            android:id="@+id/saoyisao"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"
-            android:layout_marginEnd="@dimen/dp_20"
-            android:src="@drawable/saoyisao" />
-
-        <EditText
-            android:id="@+id/edit_address"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginEnd="@dimen/dp_10"
-
-            android:layout_toStartOf="@+id/saoyisao"
-            android:background="@null"
-            android:hint="@string/input_address"
-            android:textColor="#ffa6b0bd"
-            android:textSize="14sp" />
-
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-
-        android:layout_height="@dimen/dp_50"
-        android:layout_marginTop="@dimen/dp_10"
-        android:background="@color/white">
-
-
-        <TextView
-
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginStart="@dimen/dp_15"
-            android:text="@string/zhuanchu_size"
-            android:textColor="#ff333333"
-            android:textSize="14sp" />
-
-
-        <EditText
-
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:inputType="number"
-            android:layout_marginEnd="@dimen/dp_15"
-            android:background="@null"
-            android:hint="@string/input_tibi_size"
-            android:textColor="#ffa6b0bd"
-            android:textSize="14sp" />
-
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-
-        android:layout_height="@dimen/dp_50"
-
-        >
-
-
-        <TextView
-            android:id="@+id/keyong"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginStart="@dimen/dp_15"
-            android:text="@string/ketong"
-            android:textColor="#ff333333"
-            android:textSize="14sp" />
-
-
-
-        <TextView
-            android:id="@+id/ketong_size"
-            android:layout_toRightOf="@id/keyong"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginStart="@dimen/dp_3"
-            android:text="100000 USDT"
-            android:textColor="#03A579"
-            android:textSize="14sp" />
-
-        <TextView
-            android:id="@+id/dongjie_size"
-            android:layout_marginEnd="@dimen/dp_15"
-            android:layout_alignParentEnd="true"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginStart="@dimen/dp_3"
-            android:text="100000 USDT"
-            android:textColor="#F65448"
-            android:textSize="14sp" />
-
-        <TextView
-            android:layout_marginEnd="@dimen/dp_3"
-            android:layout_toStartOf="@+id/dongjie_size"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginStart="@dimen/dp_15"
-            android:text="@string/dongjie"
-            android:textColor="#ff333333"
-            android:textSize="14sp" />
-
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-
-        android:layout_height="@dimen/dp_50"
-        android:layout_marginTop="@dimen/dp_10"
-        android:background="@color/white">
-
-
-        <TextView
-
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginStart="@dimen/dp_15"
-            android:text="@string/shouxufei"
-            android:textColor="#ff333333"
-            android:textSize="14sp" />
-
-
-        <TextView
-            android:layout_toLeftOf="@+id/ll_add"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="5"
-            android:layout_centerVertical="true"
-
-            android:layout_marginEnd="@dimen/dp_15"
-            android:background="@null"
-
-            android:textColor="#FFD31C"
-            android:textSize="14sp" />
-
+        android:layout_height="match_parent">
         <LinearLayout
-            android:id="@+id/ll_add"
-            android:layout_marginEnd="@dimen/dp_15"
-            android:layout_centerVertical="true"
-            android:layout_alignParentEnd="true"
             android:orientation="vertical"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <include
+                android:id="@+id/tool"
 
-            <ImageView
-                android:src="@drawable/sanjiao"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-            <ImageView
-                android:src="@drawable/sanjiao"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                layout="@layout/public_title_bar" />
 
+            <RelativeLayout
+                android:id="@+id/re"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_50"
+                android:layout_below="@+id/tool"
+                android:layout_marginTop="@dimen/dp_8"
+                android:background="@color/white">
+
+
+                <TextView
+                    android:id="@+id/bi_type"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="@dimen/dp_15"
+                    android:text="USDT"
+                    android:textColor="#ff333333"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/choose_bi"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="@dimen/dp_20"
+                    android:layout_marginRight="2dp"
+                    android:drawableRight="@drawable/sanjiao"
+                    android:drawablePadding="@dimen/dp_5"
+                    android:text="@string/choose_bi"
+                    android:textColor="#ffa6b0bd"
+                    android:textSize="14sp" />
+
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+
+                android:layout_height="@dimen/dp_50"
+                android:layout_marginTop="@dimen/dp_1"
+                android:background="@color/white">
+
+
+                <TextView
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="@dimen/dp_15"
+                    android:text="@string/address1"
+                    android:textColor="#ff333333"
+                    android:textSize="14sp" />
+
+
+                <ImageView
+                    android:id="@+id/saoyisao"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="@dimen/dp_20"
+                    android:src="@drawable/saoyisao" />
+
+                <EditText
+                    android:id="@+id/edit_address"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="@dimen/dp_10"
+
+                    android:layout_toStartOf="@+id/saoyisao"
+                    android:background="@null"
+                    android:hint="@string/input_address"
+                    android:textColor="#ffa6b0bd"
+                    android:textSize="14sp" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+
+                android:layout_height="@dimen/dp_50"
+                android:layout_marginTop="@dimen/dp_10"
+                android:background="@color/white">
+
+
+                <TextView
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="@dimen/dp_15"
+                    android:text="@string/zhuanchu_size"
+                    android:textColor="#ff333333"
+                    android:textSize="14sp" />
+
+
+                <EditText
+                    android:id="@+id/edit_size"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:inputType="number"
+                    android:layout_marginEnd="@dimen/dp_15"
+                    android:background="@null"
+                    android:hint="@string/input_tibi_size"
+                    android:textColor="#ffa6b0bd"
+                    android:textSize="14sp" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+
+                android:layout_height="@dimen/dp_50"
+
+                >
+
+
+                <TextView
+                    android:id="@+id/keyong"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="@dimen/dp_15"
+                    android:text="@string/ketong"
+                    android:textColor="#ff333333"
+                    android:textSize="14sp" />
+
+
+
+                <TextView
+                    android:id="@+id/ketong_size"
+                    android:layout_toRightOf="@id/keyong"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="@dimen/dp_3"
+                    android:text="100000 USDT"
+                    android:textColor="#03A579"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/dongjie_size"
+                    android:layout_marginEnd="@dimen/dp_15"
+                    android:layout_alignParentEnd="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="@dimen/dp_3"
+                    android:text="100000 USDT"
+                    android:textColor="#F65448"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:layout_marginEnd="@dimen/dp_3"
+                    android:layout_toStartOf="@+id/dongjie_size"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="@dimen/dp_15"
+                    android:text="@string/dongjie"
+                    android:textColor="#ff333333"
+                    android:textSize="14sp" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+
+                android:layout_height="@dimen/dp_50"
+                android:layout_marginTop="@dimen/dp_10"
+                android:background="@color/white">
+
+
+                <TextView
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="@dimen/dp_15"
+                    android:text="@string/shouxufei"
+                    android:textColor="#ff333333"
+                    android:textSize="14sp" />
+
+
+                <TextView
+                    android:layout_toLeftOf="@+id/ll_add"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="5"
+                    android:layout_centerVertical="true"
+                    android:id="@+id/textWithdrawFree"
+                    android:layout_marginEnd="@dimen/dp_15"
+                    android:background="@null"
+
+                    android:textColor="#FFD31C"
+                    android:textSize="14sp" />
+
+                <LinearLayout
+                    android:id="@+id/ll_add"
+                    android:layout_marginEnd="@dimen/dp_15"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentEnd="true"
+                    android:orientation="vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:src="@drawable/image_hq_moren"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/dp_20" />
+                    <!--<ImageView-->
+                        <!--android:src="@drawable/sanjiao"-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content" />-->
+
+                </LinearLayout>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+
+                android:layout_height="@dimen/dp_50"
+                android:layout_marginTop="@dimen/dp_1"
+                android:background="@color/white">
+
+
+                <TextView
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="@dimen/dp_15"
+                    android:text="@string/note_pws"
+                    android:textColor="#ff333333"
+                    android:textSize="14sp" />
+
+
+                <EditText
+                    android:id="@+id/edit_code"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toStartOf="@+id/getcode"
+                    android:layout_centerVertical="true"
+                    android:inputType="number"
+                    android:layout_marginEnd="@dimen/dp_15"
+                    android:background="@null"
+                    android:hint="@string/input_notepwd"
+                    android:textColor="#ffa6b0bd"
+                    android:textSize="14sp" />
+
+
+                <TextView
+                    android:id="@+id/getcode"
+                    android:layout_marginEnd="@dimen/dp_15"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/get_note"
+                    android:textColor="#ffffd31c"
+                    android:textSize="14sp"
+                    />
+            </RelativeLayout>
+            <TextView
+                android:id="@+id/chongbi_hint"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/re"
+                android:layout_marginStart="@dimen/dp_15"
+                android:layout_marginTop="@dimen/dp_20"
+                android:text="@string/caozuo_hint"
+                android:textColor="#ff333333"
+                android:textSize="14sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_marginStart="@dimen/dp_15"
+                android:layout_marginTop="@dimen/sp_16"
+                android:layout_marginEnd="@dimen/dp_15"
+                android:lineSpacingExtra="@dimen/dp_10"
+                android:text="@string/tibi_info"
+                android:textColor="#ff999999"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/next_do"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_45"
+                android:layout_alignParentBottom="true"
+                android:layout_marginStart="@dimen/dp_15"
+                android:layout_marginEnd="@dimen/dp_15"
+                android:layout_marginTop="@dimen/dp_50"
+                android:background="@drawable/yellowback_radio10"
+                android:gravity="center"
+                android:text="@string/ok"
+                android:textColor="#ffffffff"
+                android:textSize="@dimen/sp_15" />
         </LinearLayout>
-
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-
-        android:layout_height="@dimen/dp_50"
-        android:layout_marginTop="@dimen/dp_1"
-        android:background="@color/white">
+    </androidx.core.widget.NestedScrollView>
 
 
-        <TextView
-
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginStart="@dimen/dp_15"
-            android:text="@string/note_pws"
-            android:textColor="#ff333333"
-            android:textSize="14sp" />
-
-
-        <EditText
-
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_toStartOf="@+id/getcode"
-            android:layout_centerVertical="true"
-            android:inputType="number"
-            android:layout_marginEnd="@dimen/dp_15"
-            android:background="@null"
-            android:hint="@string/input_notepwd"
-            android:textColor="#ffa6b0bd"
-            android:textSize="14sp" />
-
-
-        <TextView
-            android:id="@+id/getcode"
-            android:layout_marginEnd="@dimen/dp_15"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/get_note"
-            android:textColor="#ffffd31c"
-            android:textSize="14sp"
-            />
-    </RelativeLayout>
-    <TextView
-        android:id="@+id/chongbi_hint"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/re"
-        android:layout_marginStart="@dimen/dp_15"
-        android:layout_marginTop="@dimen/dp_20"
-        android:text="@string/caozuo_hint"
-        android:textColor="#ff333333"
-        android:textSize="14sp" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/chongbi_hint"
-        android:layout_marginStart="@dimen/dp_15"
-        android:layout_marginTop="@dimen/sp_16"
-        android:layout_marginEnd="@dimen/dp_15"
-        android:lineSpacingExtra="@dimen/dp_10"
-        android:text="@string/tibi_info"
-        android:textColor="#ff999999"
-        android:textSize="12sp" />
-
-    <TextView
-        android:id="@+id/next_do"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_45"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="@dimen/dp_15"
-        android:layout_marginEnd="@dimen/dp_15"
-        android:layout_marginTop="@dimen/dp_50"
-        android:background="@drawable/yellowback_radio10"
-        android:gravity="center"
-        android:text="@string/ok"
-        android:textColor="#ffffffff"
-        android:textSize="@dimen/sp_15" />
 </LinearLayout>

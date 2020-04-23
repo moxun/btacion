@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/re_back"
+        android:background="@drawable/icon_gx_back"
+       android:layout_centerHorizontal="true"
+        android:layout_width="@dimen/dp_300"
+        android:layout_height="@dimen/dp_350">
+
+        <TextView
+            android:layout_marginStart="@dimen/dp_30"
+                android:layout_alignParentBottom="true"
+            android:layout_marginBottom="@dimen/dp_90"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="发现新版本！（v.2.2.717）\n\n
+
+1.解决部分已知bug；\n
+2.添加分享功能；\n
+3.合约界面改版；
+"
+            android:textColor="#ff333333"
+            android:textSize="15sp"
+            tools:ignore="HardcodedText" />
+
+        <TextView
+            android:layout_marginBottom="@dimen/dp_10"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/tm_whiteliner_20"
+            android:paddingBottom="@dimen/dp_10"
+            android:paddingTop="@dimen/dp_10"
+            android:paddingEnd="@dimen/dp_58"
+            android:paddingStart="@dimen/dp_58"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/now_update"
+            android:textColor="#ffffffff"
+            android:textSize="21sp"
+            />
+    </RelativeLayout>
+    <ImageView
+        android:id="@+id/close"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/re_back"
+        android:layout_width="wrap_content"
+        android:src="@drawable/icon_gx_close"
+        android:layout_height="wrap_content" />
+</RelativeLayout>

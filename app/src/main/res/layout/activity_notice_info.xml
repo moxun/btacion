@@ -20,20 +20,40 @@
         android:layout_height="match_parent">
         <LinearLayout
             android:orientation="vertical"
+            android:layout_marginStart="@dimen/dp_15"
+            android:layout_marginEnd="@dimen/dp_15"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
             <TextView
-                android:id="@+id/content"
+                android:id="@+id/title"
                 android:layout_marginTop="@dimen/dp_19"
-                android:layout_marginStart="@dimen/dp_15"
+
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="PSA集团签署30亿欧元追加贷款合约
 
-"
+                android:text="PSA集团签署30亿欧元追加贷款合约"
                 android:textColor="#ff020000"
                 android:textSize="16sp"
+                />
+            <TextView
+                android:id="@+id/time"
+                android:layout_marginTop="@dimen/dp_15"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="2020-06-07 17:00:00"
+                android:textColor="#ff999999"
+                android:textSize="12sp"
+                />
+
+
+            <TextView
+                android:id="@+id/content"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_20"
+                android:textColor="#ff666666"
+                android:textSize="14sp"
                 />
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>

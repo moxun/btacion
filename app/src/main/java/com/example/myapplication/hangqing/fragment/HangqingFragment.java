@@ -63,7 +63,7 @@ public class HangqingFragment extends BaseFragment {
         moduleBeans.add(new ModuleBean(getString(R.string.helpcenter), R.drawable.icon_help, 0));
         recyHeyue.setNestedScrollingEnabled(false);
         recyHeyue.setLayoutManager(new LinearLayoutManager(mActivity));
-        recyHeyue.setAdapter(new HomeHeyueAdapter(moduleBeans));
+        recyHeyue.setAdapter(new HomeHeyueAdapter(moduleBeans,mActivity));
     }
 
     @Override

@@ -53,6 +53,7 @@
             android:textSize="12sp" />
 
         <TextView
+            android:id="@+id/yang"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/zc_type"
@@ -131,6 +132,31 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="@dimen/dp_10"
                 android:text="@string/tibi"
+                android:textColor="@color/Color333333"
+                android:textSize="@dimen/sp_12" />
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/ll_huazhuan"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <ImageView
+
+                android:layout_width="@dimen/dp_46"
+                android:layout_height="@dimen/dp_46"
+                android:layout_gravity="center_horizontal"
+
+                android:src="@drawable/icon_zic_hua" />
+
+            <TextView
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/dp_10"
+                android:text="@string/huahzuan"
                 android:textColor="@color/Color333333"
                 android:textSize="@dimen/sp_12" />
         </LinearLayout>

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/back_yaoqingone"
+    tools:context=".home.fragment.YaoqingOneFragment">
+
+
+    <ImageButton
+        android:id="@+id/finish"
+
+        android:src="@drawable/icon_back"
+        android:layout_marginStart="@dimen/dp_10"
+        android:layout_marginTop="@dimen/dp_10"
+        android:layout_width="@dimen/dp_45"
+        android:background="@null"
+        android:layout_height="@dimen/dp_45" />
+    <TextView
+        android:id="@+id/tool_title"
+        android:text="@string/yaoqinghaoyou"
+
+        android:layout_marginTop="@dimen/dp_18"
+        android:layout_centerHorizontal="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:textColor="#ff333333"
+        android:textSize="@dimen/sp_17"
+        />
+
+
+    <ImageView
+        android:layout_below="@+id/tool_title"
+        android:layout_marginTop="@dimen/dp_30"
+        android:src="@drawable/yaoqingtext1"
+        android:layout_centerHorizontal="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+
+    <TextView
+        android:id="@+id/youcode"
+        android:layout_centerHorizontal="true"
+        android:layout_above="@+id/erweima"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="您的邀请码为："
+        android:textColor="#ffffffff"
+        android:textSize="13sp"
+        />
+    <ImageView
+        android:id="@+id/erweima"
+       android:layout_centerInParent="true"
+        android:layout_marginTop="@dimen/dp_30"
+        android:background="@color/white"
+        android:layout_centerHorizontal="true"
+        android:layout_width="@dimen/dp_177"
+        android:layout_height="@dimen/dp_177" />
+</RelativeLayout>

@@ -2,11 +2,14 @@ package com.example.myapplication.base;
 
 import android.content.Context;
 import android.content.pm.ActivityInfo;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.IBinder;
 
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.webkit.WebView;
 
 
 import androidx.fragment.app.FragmentActivity;
@@ -22,6 +25,22 @@ import butterknife.ButterKnife;
 
 public abstract class BaseFragmentActivity extends FragmentActivity {
 
+    public LayoutInflater baseInflater;
+
+    public void chenjin(int color) {
+        StatusBarUtil.setColor(this, getResources().getColor(color), 0);
+        StatusBarUtil.setRootViewFitsSystemWindows(this, true);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            WebView.enableSlowWholeDocumentDraw();
+        }
+        View decor = getWindow().getDecorView();
+        boolean dark = true;
+        if (dark) {
+            decor.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+        } else {
+            decor.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
+        }
+    }
 
     /**
      * 初始化视图
@@ -43,19 +62,12 @@ public abstract class BaseFragmentActivity extends FragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-        //沉浸式状态栏
-        StatusBarUtil.setColor(BaseFragmentActivity.this, getResources().getColor(R.color.white), 0);
-        View decor = getWindow().getDecorView();
-        boolean dark = true;
-        if (dark) {
-            decor.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
-        } else {
-            decor.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
-        }
+      chenjin(R.color.white);
         setContentView(getLayoutId());
         //注解绑定
         ButterKnife.bind(this);
         initData();
+        baseInflater = LayoutInflater.from(this);
         initView();
     }
 

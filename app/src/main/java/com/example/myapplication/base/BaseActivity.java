@@ -1,5 +1,6 @@
 package com.example.myapplication.base;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
@@ -7,41 +8,63 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.IBinder;
 
+import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.webkit.WebView;
 
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myapplication.R;
+import com.example.myapplication.ZgwApplication;
+import com.example.myapplication.base.adapter.ChooseBiTypeAdapter;
+import com.example.myapplication.base.adapter.DilogChooseAdapter;
+import com.example.myapplication.bean.CoinsListBean;
+import com.example.myapplication.okhttp.OkHttpUtils;
+import com.example.myapplication.okhttp.callback.ResponseCallBack;
+import com.example.myapplication.okhttp.callback.ResultModelCallback;
+import com.example.myapplication.utils.ActivityMAnger;
+import com.example.myapplication.utils.DialogUtil;
+import com.example.myapplication.utils.SharedPreferenceUtils;
 import com.example.myapplication.utils.StatusBarUtil;
+
+import org.json.JSONException;
+
+import java.util.ArrayList;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
-/**  Activity的基础类
+/**
+ * Activity的基础类
  * Created by LG on 2017/3/7.
  */
 
 public abstract class BaseActivity extends AppCompatActivity {
 
+    public LayoutInflater baseInflater;
+    private Dialog dialog;
 
     /**
      * 初始化视图
      */
-    protected  abstract void initView();
+    protected abstract void initView();
 
     /**
      * 初始化数据
      */
-    protected  abstract void initData();
+    protected abstract void initData();
 
     /**
      * 加载布局文件
+     *
      * @return
      */
-    protected  abstract int getLayoutId();
+    protected abstract int getLayoutId();
 
     private Unbinder unbinder;
 
@@ -54,11 +77,14 @@ public abstract class BaseActivity extends AppCompatActivity {
         setContentView(getLayoutId());
         //注解绑定
         unbinder = ButterKnife.bind(this);
+        baseInflater = LayoutInflater.from(this);
+        ActivityMAnger.getInstance().AddActivity(this);
         //沉浸式状态栏
         chenjin(R.color.white);
         initData();
         initView();
     }
+
     /**
      * [页面跳转]
      *
@@ -83,6 +109,8 @@ public abstract class BaseActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+
+
     /**
      * 携带数据页面跳转并且有请求码
      *
@@ -98,6 +126,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         }
         startActivityForResult(intent, requestCode);
     }
+
     public void chenjin(int color) {
         StatusBarUtil.setColor(BaseActivity.this, getResources().getColor(color), 0);
         StatusBarUtil.setRootViewFitsSystemWindows(this, true);
@@ -142,23 +171,21 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
 
-    public interface SessionInfoCallback{
+    public interface SessionInfoCallback {
         void onResponse();
     }
 
-    public interface UserinfoCallback{
-        void onResponse();
-    }
-
-
-
-    public interface PersonalInfoCallback{
+    public interface UserinfoCallback {
         void onResponse();
     }
 
 
+    public interface PersonalInfoCallback {
+        void onResponse();
+    }
 
-    public interface UserLoginCallback{
+
+    public interface UserLoginCallback {
         void onResponse(String e);
     }
 
@@ -210,5 +237,6 @@ public abstract class BaseActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        ActivityMAnger.getInstance().RemoveActivity(this);
     }
 }

@@ -69,8 +69,8 @@
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="@dimen/dp_30"
                     android:layout_below="@+id/fenge"
-                    android:layout_width="154dp"
-                    android:layout_height="154dp"
+                    android:layout_width="@dimen/dp_200"
+                    android:layout_height="@dimen/dp_200"
                     android:src="@color/black"
                     />
 
@@ -87,6 +87,7 @@
 
 
                     <TextView
+                        android:id="@+id/chongbi_address"
                         android:layout_marginStart="@dimen/dp_10"
                         android:layout_centerVertical="true"
                         android:layout_width="@dimen/dp_266"

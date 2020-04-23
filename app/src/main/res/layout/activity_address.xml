@@ -6,7 +6,7 @@
 
         android:id="@+id/tool"/>
     <androidx.recyclerview.widget.RecyclerView
-
+        android:background="@color/white"
         android:layout_below="@id/tool"
         android:visibility="gone"
         android:id="@+id/recy_book"

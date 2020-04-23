@@ -45,16 +45,14 @@ public class ZgwApplication extends Application {
      */
   //  public static String appRequestUrl = "https://CoinMars.codeceo.org/api/";
     //public static String appRequestUrl = "https://www.vtsbank.com/api/";
-    public static String appRequestUrl = "https://www.coinmars.io/api/";
+    public static String appRequestUrl = "http://47.114.103.0:8085/";
     /**
      * 根据后期服务器图片地址修改，故用此域名访问。
      */
     public static String appPictureUrl="http://vtsbank.oss-cn-hongkong.aliyuncs.com";
-    public static String socket="ws://bull.wanzhantong.cn/socket.io/?EIO=3&transport=websocket";
-    /**
-     * app下载地址
-     */
-    public static String appDownloadUrl="http://vtsbank.oss-cn-hongkong.aliyuncs.com/download/andorid/version.json";
+    public static String socket="wss://api.huobi.pro/ws";
+
+    public static String urlimg="http://47.114.103.0:8085/wallet/img/";
     /**
      * rjax请求的key
      */

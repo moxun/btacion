@@ -95,8 +95,9 @@ public class KlineActivity extends BaseActivity {
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
             if (msg.what == 0x1649) {
-                mWebSocket.send("2");
+//                mWebSocket.send("2");
             } else if (msg.what == 0x1305) {
+
                 socket();
             }
         }
@@ -119,27 +120,31 @@ public class KlineActivity extends BaseActivity {
             @Override
             public void onOpen(WebSocket webSocket, Response response) {
                 super.onOpen(webSocket, response);
+                Log.d("------","连接成功");
                 mWebSocket = webSocket;
-                mWebSocket.send("1");
-                timer = new Timer();
-                TimerTask task = new TimerTask() {
-                    @Override
-                    public void run() {
-                        Message message = new Message();
-                        message.what = 0x1649;
-                        handler.sendMessage(message);
-                    }
-                };
-
-                timer.schedule(task, 25000, 25000);
+                 mWebSocket.send("{ \"sub\": \"topic to sub\", \"id\": \"id1\" }");
+//                Log.d("webTest",send+"");
+//                timer = new Timer();
+//                TimerTask task = new TimerTask() {
+//                    @Override
+//                    public void run() {
+//                        Message message = new Message();
+//                        message.what = 0x1649;
+//                        handler.sendMessage(message);
+//                    }
+//                };
+//
+//                timer.schedule(task, 25000, 25000);
             }
 
             //服务器推送过来的消息
             @Override
             public void onMessage(WebSocket webSocket, String text) {
                 super.onMessage(webSocket, text);
-                String socket = StringUtil.jianWu(text, 2);
-                try {
+
+                //String socket = StringUtil.jianWu(text, 2);
+                Log.d("k线",text);
+               /* try {
                     if (socket.contains("daymarket")) {
                         String replace = socket.replace("[\"daymarket\",", "");
                         String substring = replace.substring(0, replace.length() - 1);
@@ -177,13 +182,14 @@ public class KlineActivity extends BaseActivity {
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
-                }
+                }*/
             }
 
             //关闭连接中
             @Override
             public void onClosing(WebSocket webSocket, int code, String reason) {
                 super.onClosing(webSocket, code, reason);
+                Log.d("-----", "onClosing: ");
                 if (timer != null) {
                     timer.cancel();
                 }
@@ -208,11 +214,13 @@ public class KlineActivity extends BaseActivity {
             @Override
             public void onFailure(WebSocket webSocket, Throwable t, Response response) {
                 super.onFailure(webSocket, t, response);
+                Log.d("-----------", "onFailure: ."+t.getMessage());
                 if (t.getMessage() != null) {
 
                 }
             }
         };
+
         mOkHttpClient.newWebSocket(mRequest, mWebSocketListener);
     }
 
@@ -226,7 +234,7 @@ public class KlineActivity extends BaseActivity {
                     double low = jsonArray.getDouble("low");
                     double open = jsonArray.getDouble("open");
                     double close = jsonArray.getDouble("close");
-                    double volume = jsonArray.getDouble("volume");
+                    double volume = jsonArray.getDouble("vol");
                     long time = jsonArray.getLong("time");
                     String period = jsonArray.getString("period");
                     Log.d("------------", "run: "+type);
@@ -346,7 +354,7 @@ public class KlineActivity extends BaseActivity {
         calendar.add(Calendar.HOUR, -24);
         Date date2 = calendar.getTime();
         long time = date2.getTime() / 1000;
-        kline(time + "", timeInMillis + "", mName, ZgwApplication.TYPE_1MINUTE);
+//        kline(time + "", timeInMillis + "", mName, ZgwApplication.TYPE_1MINUTE);
         tab.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tabl) {

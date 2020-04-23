@@ -61,12 +61,12 @@ public class ResultModelCallback<T> extends StringCallback {
                 String code = null;
                 String message = null;
                 //Log.e("测试数据",response);
-                if (dataJson.has("status")) {
-                    code = dataJson.getString("status");
+                if (dataJson.has("code")) {
+                    code = dataJson.getString("code");
                 }
 
-                if (dataJson.has("hint")) {
-                    message = dataJson.getString("hint");
+                if (dataJson.has("message")) {
+                    message = dataJson.getString("message");
                 }
                 //读取服务器的状态码，由于接口返回实体类不一样，只能伪装成code成功的样子。
                 if (dataJson.has("ret")) {
@@ -119,7 +119,7 @@ public class ResultModelCallback<T> extends StringCallback {
                             callBack.onError(message);
                             return;
                         }
-                        getErrorCode(code);
+
                     }
                 }
 

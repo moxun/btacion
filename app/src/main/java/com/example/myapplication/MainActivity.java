@@ -2,16 +2,22 @@ package com.example.myapplication;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.Dialog;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -21,16 +27,25 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.example.myapplication.base.BaseActivity;
 import com.example.myapplication.hangqing.fragment.HangqingFragment;
 import com.example.myapplication.heyue.fragment.HeyueFragment;
 import com.example.myapplication.home.fragment.HomeFragment;
 import com.example.myapplication.mine.fragment.MineFragment;
+import com.example.myapplication.utils.DialogUtil;
 import com.example.myapplication.utils.StatusBarUtil;
 import com.example.myapplication.utils.ToastUtils;
 import com.google.android.material.bottomnavigation.BottomNavigationMenuView;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.luck.picture.lib.PictureSelector;
+import com.luck.picture.lib.config.PictureConfig;
+import com.luck.picture.lib.entity.LocalMedia;
 
+import org.apache.commons.lang.StringUtils;
+
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -53,6 +68,8 @@ public class MainActivity extends BaseActivity implements EasyPermissions.Permis
     private boolean mIsExit;
     String[] perms = new String[]{Manifest.permission.READ_EXTERNAL_STORAGE,
             Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE};
+    private List<LocalMedia> selectList;
+    private File file;
 
     @Override
     protected void initView() {
@@ -71,7 +88,21 @@ public class MainActivity extends BaseActivity implements EasyPermissions.Permis
         }
 
     }
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
 
+        if (requestCode == PictureConfig.CHOOSE_REQUEST) {
+            selectList = PictureSelector.obtainMultipleResult(data);
+            if(selectList.size()>0){
+                file = new File(selectList.get(0).getPath());
+                mineFragment.updateHead(file);
+            }
+
+        }
+
+
+    }
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
@@ -86,15 +117,16 @@ public class MainActivity extends BaseActivity implements EasyPermissions.Permis
         heyueFragment = new HeyueFragment();
         mineFragment = new MineFragment();
         mFragments.add(homePagerFragment);
-        mFragments.add(hangqingFragment);
-        mFragments.add(heyueFragment);
-        mFragments.add(mineFragment);
+        mFragments.add(homePagerFragment);
+        mFragments.add(homePagerFragment);
+        mFragments.add(homePagerFragment);
 
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction ft = fragmentManager.beginTransaction();
         ft.add(R.id.content_layout, homePagerFragment).commit();
         setButtomNavigationView();
         getPermission();
+        dialogPrompt().show();
     }
 
     @Override
@@ -222,7 +254,19 @@ public class MainActivity extends BaseActivity implements EasyPermissions.Permis
         return super.onKeyDown(keyCode, event);
     }
 
+    protected Dialog dialogPrompt() {
+        View dialogView = baseInflater.inflate(R.layout.item_gx_dialog, null);
+        final Dialog dialog = DialogUtil.showDialogCenter(this, dialogView, 300);
+        ImageView close = dialogView.findViewById(R.id.close);
 
+        close.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+        return dialog;
+    }
     private void adjustNavigationIcoSize(BottomNavigationView navigation) {
         BottomNavigationMenuView menuView = (BottomNavigationMenuView) navigation.getChildAt(0);
         for (int i = 0; i < menuView.getChildCount(); i++) {
