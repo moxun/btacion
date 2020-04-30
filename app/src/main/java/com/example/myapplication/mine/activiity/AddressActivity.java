@@ -89,7 +89,7 @@ public class AddressActivity extends BaseActivity {
         addressAdapter = new AddressAdapter(rechargeAddressBeanXES);
         recyBook.setLayoutManager(new LinearLayoutManager(this));
         recyBook.setAdapter(addressAdapter);
-        getAddressList();
+
     }
 
     @Override

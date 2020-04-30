@@ -76,6 +76,7 @@ public class HistoryActivity extends BaseFragment {
                 .addHeader("X-Requested-With", "XMLHttpReques")
                 .addHeader("Authorization", SharedPreferenceUtils.getToken())
                 .addParams("symbolId",id+"")
+                .addParams("state","submited")
                 .build()
                 .execute(new ResultModelCallback(mActivity, new ResponseCallBack<OrderBean>() {
                     @Override

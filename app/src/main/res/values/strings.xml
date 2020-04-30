@@ -221,5 +221,6 @@
     <string name="hy">合约</string>
     <string name="djbzj">冻结保证金</string>
     <string name="yxhy">永续合约</string>
-
+    <string name="text_ytj">该币种已经添加</string>
+    <string name="see">设置成功</string>
 </resources>

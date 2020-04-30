@@ -16,13 +16,17 @@ import com.example.myapplication.R;
 import com.example.myapplication.ZgwApplication;
 import com.example.myapplication.base.BaseActivity;
 import com.example.myapplication.base.adapter.ChooseBiTypeAdapter;
+import com.example.myapplication.bean.AddadsressGDBean;
 import com.example.myapplication.bean.CoinsListBean;
+import com.example.myapplication.dao.AddAdressHelper;
 import com.example.myapplication.mine.adapter.AddAdressDialogAda;
 import com.example.myapplication.okhttp.OkHttpUtils;
 import com.example.myapplication.okhttp.callback.ResponseCallBack;
 import com.example.myapplication.okhttp.callback.ResultModelCallback;
 import com.example.myapplication.utils.DialogUtil;
 import com.example.myapplication.utils.SharedPreferenceUtils;
+import com.example.myapplication.utils.StringUtils;
+import com.example.myapplication.utils.ToastUtils;
 
 import org.json.JSONException;
 
@@ -49,6 +53,9 @@ public class AddradressActivity extends BaseActivity {
     @BindView(R.id.bi_type)
     TextView biType;
     private Dialog dialog;
+    private String coinName;
+    private int id;
+    private String coinImg;
 
     @Override
     protected void initView() {
@@ -92,6 +99,9 @@ public class AddradressActivity extends BaseActivity {
             @Override
             public void onClick(View v, int pos, CoinsListBean.DataBean type) {
                 dilogChooseAdapter.setDefSelect(pos);
+                coinImg = type.getCoinImg();
+                id = type.getId();
+                coinName = type.getCoinName();
                 biType.setText(type.getCoinName());
                 dialog.dismiss();
             }
@@ -116,6 +126,20 @@ public class AddradressActivity extends BaseActivity {
                 dialog.show();
                 break;
             case R.id.next_do:
+                if(StringUtils.isEmpty(coinName)){
+                    ToastUtils.showToast(getString(R.string.choose_bi));
+                    return;
+                }
+                if(StringUtils.isEmpty(editAddress.getText().toString())){
+                    ToastUtils.showToast(getString(R.string.input_address));
+                    return;
+                }
+                if(AddAdressHelper.getInstance().queryLikeId(coinName)){
+                    AddAdressHelper.getInstance().insert(new AddadsressGDBean(null,coinName,coinImg,editAddress.getText().toString(),editCardnumber.getText().toString(),id+""));
+                }else {
+                    ToastUtils.showToast(getString(R.string.text_ytj));
+                }
+
                 break;
         }
     }

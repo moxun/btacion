@@ -165,6 +165,10 @@ public class HeyueFragment extends BaseFragment {
     private ArrayList<SymbolBean.DataBean> synolds;
     private SymoblAdapter mAdapter;
     private boolean isla=false;
+    private double dwdj;
+    private String orderid1;
+    private Dialog dialog;
+
     public HeyueFragment() {
         // Required empty public constructor
     }
@@ -276,8 +280,8 @@ public class HeyueFragment extends BaseFragment {
                     public void onResponse(OrderBean response) throws JSONException {
                         if (response.getData().size() > 0) {
                             OrderBean.DataBean data = response.getData().get(response.getData().size() - 1);
-
-
+                            dwdj = response.getData().get(0).getMargin();
+                            dongjiebzo.setText(MoneyUtils.decimalByUp(2, new BigDecimal(dwdj)) + "");
                             dingdanjine.setText(data.getMargin() + "");
                             fee1.setText(data.getFee() + "");
                             ganggangjine.setText(data.getLeverageAmount() + "");
@@ -468,7 +472,7 @@ public class HeyueFragment extends BaseFragment {
 
     protected Dialog dialogPrompt() {
         View dialogView = baseInflater.inflate(R.layout.diaolg_zhiyzhis, null);
-        final Dialog dialog = DialogUtil.showDialogCenter(mActivity, dialogView, 300);
+        dialog = DialogUtil.showDialogCenter(mActivity, dialogView, 300);
         ImageView zy_remove = dialogView.findViewById(R.id.zy_remove);
         ImageView zy_add = dialogView.findViewById(R.id.zy_add);
         ImageView zs_remove = dialogView.findViewById(R.id.zs_remove);
@@ -578,7 +582,7 @@ public class HeyueFragment extends BaseFragment {
                 .addHeader("locale", SharedPreferenceUtils.getYuYan())
                 .addParams("loss", loss)
                 .addParams("profit", profit)
-
+                .addParams("orderId",orderid1)
 
                 .build()
                 .execute(new ResultModelCallback(mActivity, new ResponseCallBack<ChicangBean>() {
@@ -592,7 +596,8 @@ public class HeyueFragment extends BaseFragment {
 
                     @Override
                     public void onResponse(ChicangBean response) throws JSONException {
-
+                        dialog.dismiss();
+                        ToastUtils.showToast(getString(R.string.see));
                     }
                 }));
     }
@@ -611,8 +616,8 @@ public class HeyueFragment extends BaseFragment {
             } else {
                 fukui.setText("0.0");
             }
-            fukui.setText(MoneyUtils.decimalByUp(2, new BigDecimal(yongxumargin)) + "");
 
+            dongjiebzo.setText(MoneyUtils.decimalByUp(2, new BigDecimal(yongxumargin)) + "");
             type = false;
         } else {
             title.setText(getString(R.string.dw));
@@ -626,7 +631,7 @@ public class HeyueFragment extends BaseFragment {
                 fukui.setText("0.0");
             }
             bapzheng.setText(MoneyUtils.decimalByUp(2, new BigDecimal(dianweimargin)) + "");
-
+            dongjiebzo.setText(MoneyUtils.decimalByUp(2, new BigDecimal(dwdj)) + "");
             type = true;
         }
     }
@@ -802,8 +807,8 @@ public class HeyueFragment extends BaseFragment {
     }
 
 
-    public void changView() {
-
+    public void changView(String orderid) {
+        orderid1 = orderid;
         dialogPrompt().show();
     }
 

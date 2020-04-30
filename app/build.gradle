@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'org.greenrobot.greendao'
 //apply plugin: 'android-apt'
 android {
     aaptOptions.cruncherEnabled = false
@@ -41,6 +42,16 @@ android {
     }
     productFlavors {
     }
+    greendao {
+        //数据库的schema版本，也可以理解为数据库版本号
+        schemaVersion 1
+        //设置DaoMaster、DaoSession、Dao包名，也就是要放置这些类的包的全路径。
+        daoPackage 'com.example.myapplication.dao'
+        //设置DaoMaster、DaoSession、Dao目录
+        targetGenDir 'src/main/java'
+
+    }
+
 }
 
 dependencies {
@@ -97,7 +108,7 @@ dependencies {
     implementation 'com.sunfusheng:marqueeview:1.3.3'
     implementation 'com.github.LuckSiege.PictureSelector:picture_library:v2.2.4'
 
-
+    implementation 'org.greenrobot:greendao:3.2.2'
 }
 repositories {
     mavenCentral()

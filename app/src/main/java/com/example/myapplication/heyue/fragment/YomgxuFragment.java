@@ -65,7 +65,7 @@ public class YomgxuFragment extends BaseFragment {
     private double yongxumargin;
     private double nowprice;
     private int id;
-    private int orderid;
+    private String orderid;
     private String type;
 
 
@@ -163,24 +163,25 @@ public class YomgxuFragment extends BaseFragment {
                     }
                 }));
     }
-    public void Close(int id) {
+    public void Close(int id,String orserid) {
         OkHttpUtils.get()
                 .url(ZgwApplication.appRequestUrl + "wallet/v1/user/order/point/close")
                 .addHeader("locale", SharedPreferenceUtils.getYuYan())
                 .addHeader("X-Requested-With", "XMLHttpReques")
                 .addHeader("Authorization", SharedPreferenceUtils.getToken())
-                .addParams("orderId", id + "")
+                .addParams("orderId", orserid + "")
+                .addParams("symbolId",id+"")
                 .build()
                 .execute(new ResultModelCallback(mActivity, new ResponseCallBack<ChicangBean>() {
 
                     @Override
                     public void onError(String e) {
-                        Toast.makeText(mActivity, e, Toast.LENGTH_SHORT).show();
+
                     }
 
                     @Override
                     public void onResponse(ChicangBean response) throws JSONException {
-                        Log.d("------------","成功");
+
                     }
                 }));
     }
@@ -188,11 +189,11 @@ public class YomgxuFragment extends BaseFragment {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.pingcang:
-                Close(orderid);
+                Close(id,orderid);
                 break;
             case R.id.yksz:
                 assert YomgxuFragment.this.getParentFragment() != null;
-                ((HeyueFragment) (YomgxuFragment.this.getParentFragment())).changView();
+                ((HeyueFragment) (YomgxuFragment.this.getParentFragment())).changView(orderid);
                 break;
         }
     }

@@ -17,6 +17,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.bumptech.glide.Glide;
 import com.example.myapplication.R;
@@ -59,7 +60,7 @@ import okhttp3.MediaType;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class HomeFragment extends BaseFragment {
+public class HomeFragment extends BaseFragment implements  SwipeRefreshLayout.OnRefreshListener{
 
     @BindView(R.id.app_back)
     ImageView appBack;
@@ -141,6 +142,7 @@ public class HomeFragment extends BaseFragment {
                         if (response.getData().getList().size() == 0) {
                             return;
                         }
+                        mGongGaoList.clear();
                         for (int i = 0; i < response.getData().getList().size(); i++) {
                             mGongGaoList.add(response.getData().getList().get(i).getTitle());
                         }
@@ -168,6 +170,7 @@ public class HomeFragment extends BaseFragment {
     private void setList(final List<BannerBean.DataBean.ListBean> news) {
 
         bannerLists = new ArrayList<>();
+        bannerLists.clear();
         for (int i = 0; i < news.size(); i++) {
             ImageData imageData = new ImageData();
             imageData.setImage(ZgwApplication.urlimg + news.get(i).getImg());
@@ -202,7 +205,7 @@ public class HomeFragment extends BaseFragment {
         recyModle.setLayoutManager(new GridLayoutManager(getContext(), 4));
         recyModle.setAdapter(new HomeModleAdapter(moduleBeans, getContext()));
         instrumentIdBeans = new ArrayList<>();
-
+        refreshLayout.setOnRefreshListener(this);
         recyHeyue.setNestedScrollingEnabled(false);
         recyHeyue.setLayoutManager(new LinearLayoutManager(mActivity));
         homeHeyueAdapter = new HomeHeyueAdapter(lists, mActivity);
@@ -241,10 +244,11 @@ public class HomeFragment extends BaseFragment {
 
 
     public void getListinfo(List<String> type) {
+        lists.clear();
         MediaType mediaType = MediaType.parse("application/json");
 
         String s = new Gson().toJson(type);
-        Log.d("--------------", s);
+
         OkHttpUtils.postString()
                 .url(ZgwApplication.appRequestUrl + "wallet/v1/public/ticker/info")
                 .addHeader("locale", SharedPreferenceUtils.getYuYan())
@@ -473,5 +477,20 @@ public class HomeFragment extends BaseFragment {
             }
             homeHeyueAdapter.notifyDataSetChanged();
         }
+    }
+
+    @Override
+    public void onRefresh() {
+       mChengJiao=1;
+         mShiShi=1;
+         mZhangDie=1;
+        imageZhangDie.setImageResource(R.drawable.image_hq_moren);
+
+        imageChengJiao.setImageResource(R.drawable.image_hq_moren);
+        imageShiShi.setImageResource(R.drawable.image_hq_moren);
+        getBannerList();
+        getList();
+        getListinfo(instrumentIdBeans);
+        refreshLayout.setRefreshing(false);
     }
 }

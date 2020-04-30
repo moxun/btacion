@@ -62,14 +62,14 @@ public class ChiCangFragment extends BaseFragment {
         historyOrderAdapter.setOnItemListener(new Chicangadapter.OnItemListener() {
             @Override
             public void onClick(OrderBean.DataBean string) {
-                Close(string.getSymbolId());
+                Close(string.getSymbolId(),string.getId());
             }
 
             @Override
             public void setClose(OrderBean.DataBean string) {
 
                 assert ChiCangFragment.this.getParentFragment() != null;
-                ((HeyueFragment) (ChiCangFragment.this.getParentFragment())).changView();
+                ((HeyueFragment) (ChiCangFragment.this.getParentFragment())).changView(string.getId());
             }
         });
     }
@@ -141,13 +141,14 @@ public class ChiCangFragment extends BaseFragment {
         return R.layout.activity_history;
     }
 
-    public void Close(int id) {
+    public void Close(int id,String oreserid) {
         OkHttpUtils.get()
                 .url(ZgwApplication.appRequestUrl + "wallet/v1/user/order/point/close")
                 .addHeader("locale", SharedPreferenceUtils.getYuYan())
                 .addHeader("X-Requested-With", "XMLHttpReques")
                 .addHeader("Authorization", SharedPreferenceUtils.getToken())
                 .addParams("symbolId", id + "")
+                .addParams("orderId",oreserid)
                 .build()
                 .execute(new ResultModelCallback(mActivity, new ResponseCallBack<ChicangBean>() {
 
