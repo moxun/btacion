@@ -22,39 +22,41 @@
             />
 
         <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_40"
+            android:layout_marginStart="@dimen/dp_15"
             android:layout_marginTop="@dimen/dp_15"
             android:layout_marginEnd="@dimen/dp_15"
-            android:layout_marginStart="@dimen/dp_15"
-            android:background="@drawable/grayback_radio10"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_40">
+            android:background="@drawable/grayback_radio10">
 
 
             <ImageView
                 android:id="@+id/zy_remove"
-                android:layout_marginStart="@dimen/dp_12"
-                android:layout_centerVertical="true"
-                android:layout_width="wrap_content"
-                android:src="@drawable/icon_remove_close"
-                android:layout_height="wrap_content" />
-
-            <TextView
-                android:id="@+id/zy_size"
-                android:layout_centerInParent="true"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="@dimen/dp_12"
+                android:src="@drawable/icon_remove_close" />
+
+            <EditText
+                android:id="@+id/zy_size"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:background="@null"
+                android:inputType="number"
                 android:text="100"
                 android:textColor="#ff333333"
-                android:textSize="14sp"
-                />
+                android:textSize="14sp" />
+
             <ImageView
                 android:id="@+id/zy_add"
-                android:layout_alignParentRight="true"
-                android:layout_marginEnd="@dimen/dp_12"
-                android:layout_centerVertical="true"
                 android:layout_width="wrap_content"
-                android:src="@drawable/icon_add_yinli"
                 android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="@dimen/dp_12"
+                android:src="@drawable/icon_add_yinli"
                 tools:ignore="RtlHardcoded" />
 
         </RelativeLayout>
@@ -86,8 +88,10 @@
                 android:src="@drawable/icon_remove_close"
                 android:layout_height="wrap_content" />
 
-            <TextView
+            <EditText
                 android:id="@+id/zs_size"
+                android:background="@null"
+                android:inputType="number"
                 android:layout_centerInParent="true"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

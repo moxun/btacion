@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/dp_15"
+            android:paddingTop="@dimen/dp_15"
+            android:paddingRight="@dimen/dp_15">
+
+            <RelativeLayout
+                android:id="@+id/rela1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/text_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="【1】关于BitForce"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/sp_15" />
+                </LinearLayout>
+
+                <ImageView
+                    android:id="@+id/image"
+                    android:layout_width="@dimen/dp_14"
+                    android:layout_height="@dimen/dp_8"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/icon_xiangshang" />
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/text_contentText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/rela1"
+                android:layout_marginTop="@dimen/dp_10"
+                android:lineSpacingExtra="@dimen/dp_5"
+                android:text="BitForce是一个矿机租赁矿服务平台，致力于通过APP—键式租赁矿机算力，以较低的门槛及简洁的用户体验，为用户节省了购买、安装、托管矿机的复杂流程，让人人都能快速参与挖矿，享受在家也能拥有小型矿场的收益。"
+                android:textColor="#999999"
+                android:textSize="@dimen/sp_14"
+                android:visibility="gone" />
+        </RelativeLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_0_5"
+            android:layout_alignParentBottom="true"
+            android:layout_marginTop="@dimen/dp_15"
+            android:background="#EEEEEE" />
+    </LinearLayout>
+</RelativeLayout>

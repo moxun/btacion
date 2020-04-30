@@ -3,6 +3,7 @@ package com.example.myapplication.mine.activiity;
 import android.os.Bundle;
 import android.text.InputType;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -25,6 +26,8 @@ import com.example.myapplication.okhttp.callback.ResponseCallBack;
 import com.example.myapplication.okhttp.callback.ResultModelCallback;
 import com.example.myapplication.utils.MoneyUtils;
 import com.example.myapplication.utils.SharedPreferenceUtils;
+import com.example.myapplication.utils.StringUtils;
+import com.example.myapplication.utils.ToastUtils;
 
 import org.json.JSONException;
 
@@ -69,6 +72,8 @@ public class MyzichanActivity extends BaseActivity {
     private ArrayList<UserinfoBean.DataBean.BalanceModelsBean> balancelists;
     private HeyueAdapter heyueAdapter;
     private boolean Yans=false;
+    private List<UserinfoBean.DataBean.BalanceModelsBean> balanceModels;
+
     @Override
     protected void initView() {
 
@@ -84,6 +89,24 @@ public class MyzichanActivity extends BaseActivity {
         recyHeyue.setAdapter(heyueAdapter);
 
         getUserinfo();
+
+        editName.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if(StringUtils.isEmpty(editName.getText().toString())){
+                    ToastUtils.showToast(getString(R.string.input_biname));
+                    return false;
+                }
+                balancelists.clear();
+                for (int i = 0; i < balanceModels.size(); i++) {
+                    if(balanceModels.get(i).getCoin().getCoinName().equalsIgnoreCase(editName.getText().toString())){
+                        balancelists.add(balanceModels.get(i));
+                    }
+                }
+                heyueAdapter.notifyDataSetChanged();
+                return false;
+            }
+        });
 
     }
 
@@ -109,18 +132,20 @@ public class MyzichanActivity extends BaseActivity {
 
                     @Override
                     public void onResponse(UserinfoBean response) throws JSONException {
+                        balanceModels = response.getData().getBalanceModels();
+
                         balancelists.addAll(response.getData().getBalanceModels());
                         heyueAdapter.notifyDataSetChanged();
                         double mNumber = 0;
                         double mUsdt=0;
                         List<UserinfoBean.DataBean.BalanceModelsBean> beans = response.getData().getBalanceModels();
                         for (int i = 0; i < beans.size(); i++) {
-                            mUsdt=mUsdt+Double.parseDouble(beans.get(i).getAmount());
-                            mNumber = mNumber + (Double.parseDouble(beans.get(i).getAmount()) * Double.parseDouble(beans.get(i).getCoin().getCoinPrice()));
+                            mUsdt=mUsdt+beans.get(i).getAmount();
+                            mNumber = mNumber + (beans.get(i).getAmount() * Double.parseDouble(beans.get(i).getCoin().getCoinPrice()));
                         }
-                        zcSize.setText("" + MoneyUtils.decimalByUp(4, new BigDecimal(mUsdt)));
-                        bbSize.setText(MoneyUtils.decimalByUp(4, new BigDecimal(mUsdt)) + "USDT");
-                        yang.setText("≈￥"+MoneyUtils.decimalByUp(4, new BigDecimal(mNumber)));
+                        zcSize.setText("" + MoneyUtils.decimalByUp(2, new BigDecimal(mUsdt)));
+                        bbSize.setText(MoneyUtils.decimalByUp(2, new BigDecimal(mUsdt)) + "USDT");
+                        yang.setText("≈￥"+MoneyUtils.decimalByUp(2, new BigDecimal(mNumber)));
                     }
                 }));
     }
@@ -157,16 +182,22 @@ public class MyzichanActivity extends BaseActivity {
                 startActivity(HuazhuanActivity.class);
                 break;
             case R.id.search:
+                if(StringUtils.isEmpty(editName.getText().toString())){
+                    ToastUtils.showToast(getString(R.string.input_biname));
+                    return;
+                }
+                balancelists.clear();
+                for (int i = 0; i < balanceModels.size(); i++) {
+                    if(balanceModels.get(i).getCoin().getCoinName().equalsIgnoreCase(editName.getText().toString())){
+                        balancelists.add(balanceModels.get(i));
+                    }
+                }
+                heyueAdapter.notifyDataSetChanged();
                 break;
             case R.id.seek_img:
                 break;
         }
     }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
-        ButterKnife.bind(this);
-    }
+
 }

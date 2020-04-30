@@ -55,11 +55,11 @@ public class MyCangweiBean {
         private int id;
         private int userId;
         private int symbolId;
-        private String number;
-        private String openPrice;
-        private String margin;
+        private double number;
+        private double openPrice;
+        private double margin;
         private int lever;
-        private String closePrice;
+        private double closePrice;
         private String contractType;
         /**
          * id : 0c0487a9ee0c4fdf886feda5ef2e7bc1
@@ -79,8 +79,8 @@ public class MyCangweiBean {
 
         private String stopProfit;
         private String stopLoss;
-        private String fee;
-        private String leverage;
+        private double fee;
+        private int leverage;
         private String leverageAmount;
         private String createTime;
         private String cancelTime;
@@ -113,27 +113,27 @@ public class MyCangweiBean {
             this.symbolId = symbolId;
         }
 
-        public String getNumber() {
+        public double getNumber() {
             return number;
         }
 
-        public void setNumber(String number) {
+        public void setNumber(double number) {
             this.number = number;
         }
 
-        public String getOpenPrice() {
+        public double getOpenPrice() {
             return openPrice;
         }
 
-        public void setOpenPrice(String openPrice) {
+        public void setOpenPrice(double openPrice) {
             this.openPrice = openPrice;
         }
 
-        public String getMargin() {
+        public double getMargin() {
             return margin;
         }
 
-        public void setMargin(String margin) {
+        public void setMargin(double margin) {
             this.margin = margin;
         }
 
@@ -145,11 +145,11 @@ public class MyCangweiBean {
             this.lever = lever;
         }
 
-        public String getClosePrice() {
+        public double getClosePrice() {
             return closePrice;
         }
 
-        public void setClosePrice(String closePrice) {
+        public void setClosePrice(double closePrice) {
             this.closePrice = closePrice;
         }
 
@@ -179,19 +179,19 @@ public class MyCangweiBean {
             this.stopLoss = stopLoss;
         }
 
-        public String getFee() {
+        public double getFee() {
             return fee;
         }
 
-        public void setFee(String fee) {
+        public void setFee(double fee) {
             this.fee = fee;
         }
 
-        public String getLeverage() {
+        public int getLeverage() {
             return leverage;
         }
 
-        public void setLeverage(String leverage) {
+        public void setLeverage(int leverage) {
             this.leverage = leverage;
         }
 

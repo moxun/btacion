@@ -13,8 +13,11 @@ import android.widget.TextView;
 
 import com.example.myapplication.MainActivity;
 import com.example.myapplication.R;
+
 import com.example.myapplication.ZgwApplication;
 import com.example.myapplication.base.BaseActivity;
+import com.example.myapplication.bean.JsonBean;
+import com.example.myapplication.bean.KlBean;
 import com.example.myapplication.kline.formatter.DateFormatter;
 import com.example.myapplication.kline.units.DataHelper;
 import com.example.myapplication.kline.units.KLineChartAdapter;
@@ -25,14 +28,17 @@ import com.example.myapplication.okhttp.callback.ResponseCallBack;
 import com.example.myapplication.okhttp.callback.ResultModelCallback;
 import com.example.myapplication.utils.MoneyUtils;
 import com.example.myapplication.utils.StatusBarUtil;
-
-import com.example.myapplication.utils.StringUtil;
 import com.google.android.material.tabs.TabLayout;
+import com.google.gson.Gson;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-
+import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -40,8 +46,9 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Timer;
-import java.util.TimerTask;
 import java.util.concurrent.TimeUnit;
+import java.util.zip.Inflater;
+import java.util.zip.InflaterInputStream;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -50,6 +57,7 @@ import okhttp3.Request;
 import okhttp3.Response;
 import okhttp3.WebSocket;
 import okhttp3.WebSocketListener;
+import okio.ByteString;
 
 public class KlineActivity extends BaseActivity {
 
@@ -89,21 +97,20 @@ public class KlineActivity extends BaseActivity {
     private boolean isOverLoopCount = false;
     private String mName;
     private String type="1min";
-
+    public ArrayList<String> list=new ArrayList<>();
     public Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
             if (msg.what == 0x1649) {
-//                mWebSocket.send("2");
+                mWebSocket.send("{\"op\": \"subscribe\", \"args\": [\"swap/candle60s:BTC-USD-SWAP\"]}");
             } else if (msg.what == 0x1305) {
-
                 socket();
             }
         }
     };
     private KLineChartAdapter kLineChartAdapter;
-
+    private String biname=":BTC-USD-SWAP";
     public void socket() {
         OkHttpClient.Builder builder = new OkHttpClient.Builder()
                 .readTimeout(3000, TimeUnit.SECONDS)//设置读取超时时间
@@ -120,10 +127,9 @@ public class KlineActivity extends BaseActivity {
             @Override
             public void onOpen(WebSocket webSocket, Response response) {
                 super.onOpen(webSocket, response);
-                Log.d("------","连接成功");
                 mWebSocket = webSocket;
-                 mWebSocket.send("{ \"sub\": \"topic to sub\", \"id\": \"id1\" }");
-//                Log.d("webTest",send+"");
+                Log.e("k线11111111111", "onMessage: ");
+                mWebSocket.send("{\"op\": \"subscribe\", \"args\": [\"swap/candle60s:BTC-USD-SWAP\"]}");
 //                timer = new Timer();
 //                TimerTask task = new TimerTask() {
 //                    @Override
@@ -133,7 +139,6 @@ public class KlineActivity extends BaseActivity {
 //                        handler.sendMessage(message);
 //                    }
 //                };
-//
 //                timer.schedule(task, 25000, 25000);
             }
 
@@ -141,55 +146,63 @@ public class KlineActivity extends BaseActivity {
             @Override
             public void onMessage(WebSocket webSocket, String text) {
                 super.onMessage(webSocket, text);
+                Log.e("k线11111111111", "onMessage: ");
 
-                //String socket = StringUtil.jianWu(text, 2);
-                Log.d("k线",text);
-               /* try {
-                    if (socket.contains("daymarket")) {
-                        String replace = socket.replace("[\"daymarket\",", "");
-                        String substring = replace.substring(0, replace.length() - 1);
-                        JSONObject jsonArray = new JSONObject(substring);
-                        int id = jsonArray.getInt("currency_id");
-                        int legal_id = jsonArray.getInt("legal_id");
-                        String a = id + "";
-                        String b = legal_id + "";
-                        if (a.equals(mCurrency_id) && b.equals(mLegal_id)) {
-                            runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    fuZhi(jsonArray);
-                                }
-                            });
+
+            }
+
+            @Override
+            public void onMessage(WebSocket webSocket, ByteString bytes) {
+                super.onMessage(webSocket, bytes);
+                Log.e("k线11111111111", "onMessage: "+bytes);
+                byte[] bytes1 = bytes.toByteArray();
+                try {
+                    String inflater = inflater(bytes1);
+                    Log.d("-------------",inflater);
+
+                    KlBean klineBean = new Gson().fromJson(inflater, KlBean.class);
+                    if(klineBean.getEvent()==null){
+                        for (int i = 0; i < klineBean.getData().size(); i++) {
+                            KlBean.DataBean dataBean = klineBean.getData().get(i);
+                            List<String> candle = dataBean.getCandle();
+                            KLineEntity kLineEntity = new KLineEntity();
+                            kLineEntity.setClose(Float.parseFloat(candle.get(4)));
+                            kLineEntity.setDate(candle.get(0));
+                            kLineEntity.setHigh(Float.parseFloat(candle.get(2)));
+                            kLineEntity.setLow(Float.parseFloat(candle.get(3)));
+                            kLineEntity.setOpen(Float.parseFloat(candle.get(1)));
+                            kLineEntity.setVolume(Float.parseFloat(candle.get(5)));
+                            datas.add(kLineEntity);
                         }
+
+
+
+
+                        DataHelper.calculate(datas);
+
+                        runOnUiThread((new Runnable() {
+                            public final void run() {
+
+                                kLineChartAdapter.addFooterData(datas);
+                                kLineChartAdapter.notifyDataSetChanged();
+                                kLineChartView.startAnimation();
+                                kLineChartView.refreshEnd();
+                                kLineChartView.refreshComplete();
+                            }
+
+
+                        }));
                     }
 
-                    if (socket.contains("kline")) {
-                        String replace = socket.replace("[\"kline\",", "");
-                        String substring = replace.substring(0, replace.length() - 1);
-                        Log.d("moxun", "onMessage: " + substring);
-                        JSONObject jsonArray = new JSONObject(substring);
-                        int id = jsonArray.getInt("currency_id");
-                        int legal_id = jsonArray.getInt("legal_id");
-                        String a = id + "";
-                        String b = legal_id + "";
-                        if (a.equals(mCurrency_id) && b.equals(mLegal_id))
-                            runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    kline(jsonArray);
-                                }
-                            });
-                    }
-                } catch (JSONException e) {
+                } catch (IOException e) {
                     e.printStackTrace();
-                }*/
+                }
             }
 
             //关闭连接中
             @Override
             public void onClosing(WebSocket webSocket, int code, String reason) {
                 super.onClosing(webSocket, code, reason);
-                Log.d("-----", "onClosing: ");
                 if (timer != null) {
                     timer.cancel();
                 }
@@ -214,58 +227,33 @@ public class KlineActivity extends BaseActivity {
             @Override
             public void onFailure(WebSocket webSocket, Throwable t, Response response) {
                 super.onFailure(webSocket, t, response);
-                Log.d("-----------", "onFailure: ."+t.getMessage());
                 if (t.getMessage() != null) {
+                 //   Log.e("1111111", "onFailure12: "+response.message() );
+                    Log.e("22222", "onFailure12: "+t.getMessage());
 
                 }
             }
         };
-
         mOkHttpClient.newWebSocket(mRequest, mWebSocketListener);
     }
-
-    //k线数据
-    private void kline(JSONObject jsonArray) {
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    double high = jsonArray.getDouble("high");
-                    double low = jsonArray.getDouble("low");
-                    double open = jsonArray.getDouble("open");
-                    double close = jsonArray.getDouble("close");
-                    double volume = jsonArray.getDouble("vol");
-                    long time = jsonArray.getLong("time");
-                    String period = jsonArray.getString("period");
-                    Log.d("------------", "run: "+type);
-                    if(period.equals(type)){
-                        String dateToString = getDateToString(time, "mm:ss");
-                        KLineEntity kLineEntity = new KLineEntity();
-                        kLineEntity.setClose((float)close);
-                        kLineEntity.setDate(dateToString);
-                        kLineEntity.setHigh((float) high);
-                        kLineEntity.setLow((float) low);
-                        kLineEntity.setOpen((float) open);
-                        kLineEntity.setVolume((float) volume);
-                        datas.add(kLineEntity);
-                        DataHelper.calculate(datas);
-                        runOnUiThread((new Runnable() {
-                            public final void run() {
-                                kLineChartAdapter.addFooterData(datas);
-                                kLineChartAdapter.notifyDataSetChanged();
-
-                            }
-                        }));
-                    }
-
-
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
+    /**
+     * 解压
+     * @param enData 压缩后的数据
+     * @return
+     * @throws IOException
+     */
+    public static String inflater(byte[] enData) throws IOException {
+        InputStream data = new ByteArrayInputStream(enData);
+        InflaterInputStream inputStream = new InflaterInputStream(data, new Inflater(true));
+        BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
+        StringBuilder res = new StringBuilder();
+        String line;
+        while ((line = reader.readLine()) != null) {
+            res.append(line);
+        }
+        return res.toString();
     }
+
 
     private void fuZhi(JSONObject jsonArray) {
 
@@ -328,9 +316,7 @@ public class KlineActivity extends BaseActivity {
         mLegal_id = getIntent().getStringExtra("Legal_id");
         mCurrency_id = getIntent().getStringExtra("Currency_id");
         mName = getIntent().getStringExtra("name");
-        Message message = new Message();
-        message.what = 0x1305;
-        handler.sendMessage(message);
+
 
         tab.addTab(tab.newTab().setCustomView(getCurrentFocus(R.string.tab_zhibiao, R.drawable.tab_dingdan_bg)));
         tab.addTab(tab.newTab().setCustomView(getCurrentFocus(R.string.tab_fenshi, R.drawable.tab_dingdan_bg)));
@@ -354,7 +340,7 @@ public class KlineActivity extends BaseActivity {
         calendar.add(Calendar.HOUR, -24);
         Date date2 = calendar.getTime();
         long time = date2.getTime() / 1000;
-//        kline(time + "", timeInMillis + "", mName, ZgwApplication.TYPE_1MINUTE);
+
         tab.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tabl) {
@@ -364,58 +350,45 @@ public class KlineActivity extends BaseActivity {
                 if (text.equals("1分钟")) {
                     type="1min";
                     kLineChartView.setMainDrawLine(false);
-                    long timeInMillis = Calendar.getInstance().getTimeInMillis() / 1000;//获取当前时间
-                    Calendar calendar = Calendar.getInstance();
-                    calendar.add(Calendar.HOUR, -24);
-                    Date date2 = calendar.getTime();
-                    long time = date2.getTime() / 1000;
-                    kline(time + "", timeInMillis + "", mName, ZgwApplication.TYPE_1MINUTE);
+                    datas.clear();
+                    list.clear();
+                    list.add("swap/candle60s"+biname);
+                    mWebSocket.send(new Gson().toJson(new JsonBean("subscribe",list)));
                 } else if (text.equals("5分钟")) {
                     type="5min";
-                    kLineChartView.setMainDrawLine(false);
-                    long timeInMillis = Calendar.getInstance().getTimeInMillis() / 1000;//获取当前时间
-                    Calendar calendar = Calendar.getInstance();
-                    calendar.add(Calendar.DAY_OF_WEEK, -5);
-                    Date date2 = calendar.getTime();
-                    long time = date2.getTime() / 1000;
-                    kline(time + "", timeInMillis + "", mName, ZgwApplication.TYPE_5MINUTE);
+                    datas.clear();
+                    list.clear();
+                    list.add("swap/candle300s"+biname);
+                    mWebSocket.send(new Gson().toJson(new JsonBean("subscribe",list)));
 
                 } else if (text.equals("30分钟")) {
                     type="30min";
                     kLineChartView.setMainDrawLine(false);
-                    long timeInMillis = Calendar.getInstance().getTimeInMillis() / 1000;//获取当前时间
-                    Calendar calendar = Calendar.getInstance();
-                    calendar.add(Calendar.MONTH, -1);
-                    Date date2 = calendar.getTime();
-                    long time = date2.getTime() / 1000;
-                    kline(time + "", timeInMillis + "", mName, ZgwApplication.TYPE_30MINUTE);
+                    datas.clear();
+                    list.clear();
+                    list.add("swap/candle1800s"+biname);
+                    mWebSocket.send(new Gson().toJson(new JsonBean("subscribe",list)));
                 } else if (text.equals("1小时")) {
                     type="60min";
                     kLineChartView.setMainDrawLine(false);
-                    long timeInMillis = Calendar.getInstance().getTimeInMillis() / 1000;//获取当前时间
-                    Calendar calendar = Calendar.getInstance();
-                    calendar.add(Calendar.MONTH, -2);
-                    Date date2 = calendar.getTime();
-                    long time = date2.getTime() / 1000;
-                    kline(time + "", timeInMillis + "", mName, ZgwApplication.TYPE_1HOURS);
+                    datas.clear();
+                    list.clear();
+                    list.add("swap/candle3600s"+biname);
+                    mWebSocket.send(new Gson().toJson(new JsonBean("subscribe",list)));
                 } else if (text.equals("1天")) {
                     type="1day";
                     kLineChartView.setMainDrawLine(false);
-                    long timeInMillis = Calendar.getInstance().getTimeInMillis() / 1000;//获取当前时间
-                    Calendar calendar = Calendar.getInstance();
-                    calendar.add(Calendar.YEAR, -1);
-                    Date date2 = calendar.getTime();
-                    long time = date2.getTime() / 1000;
-                    kline(time + "", timeInMillis + "", mName, ZgwApplication.TYPE_1DAY);
+                    datas.clear();
+                    list.clear();
+                    list.add("swap/candle86400s"+biname);
+                    mWebSocket.send(new Gson().toJson(new JsonBean("subscribe",list)));
                 } else if (text.equals("1周")) {
                     type= "1week";
                     kLineChartView.setMainDrawLine(false);
-                    long timeInMillis = Calendar.getInstance().getTimeInMillis() / 1000;//获取当前时间
-                    Calendar calendar = Calendar.getInstance();
-                    calendar.add(Calendar.YEAR, -5);
-                    Date date2 = calendar.getTime();
-                    long time = date2.getTime() / 1000;
-                    kline(time + "", timeInMillis + "", mName, ZgwApplication.TYPE_1WEEK);
+                    datas.clear();
+                    list.clear();
+                    list.add("swap/candle604800s"+biname);
+                    mWebSocket.send(new Gson().toJson(new JsonBean("subscribe",list)));
 
                 } else if (text.equals("1月")) {
                     type="1mon";
@@ -448,6 +421,7 @@ public class KlineActivity extends BaseActivity {
 
             }
         });
+        socket();
     }
 
     public View getCurrentFocus(int title, int drawable) {

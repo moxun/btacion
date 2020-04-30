@@ -8,6 +8,14 @@ import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.WindowManager;
 
+import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.zip.Inflater;
+import java.util.zip.InflaterInputStream;
+
 
 public class DisplayUtil {
 	public static float getDensity(Context context) {
@@ -165,4 +173,6 @@ public class DisplayUtil {
 
 	// 状态栏高度
 	private static int mStatusHeight = -1;
+
+
 }

@@ -218,7 +218,8 @@
             android:hint="@string/search_bitype"
             android:textSize="@dimen/sp_14"
             android:background="@null"
-
+            android:inputType="text"
+            android:imeOptions="actionSearch"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             tools:ignore="RtlSymmetry" />

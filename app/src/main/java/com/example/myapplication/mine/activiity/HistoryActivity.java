@@ -1,11 +1,16 @@
 package com.example.myapplication.mine.activiity;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import androidx.annotation.RequiresApi;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myapplication.R;
 import com.example.myapplication.ZgwApplication;
@@ -33,28 +38,30 @@ public class HistoryActivity extends BaseFragment {
 
 
     @BindView(R.id.recy_history)
-    PullLoadMoreRecyclerView recyHistory;
+    RecyclerView recyHistory;
     @BindView(R.id.linear_modle)
     LinearLayout linearModle;
     private HistoryOrderAdapter historyOrderAdapter;
-    private int page = 1;
+
     private ArrayList<OrderBean.DataBean> historyorders;
+    private int id;
 
-
-
+    private int page = 1;
     @Override
     protected void initView(View view, Bundle savedInstanceState) {
 
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void initData() {
-
+        id = getArguments().getInt("id");
         historyorders = new ArrayList<>();
 
         historyOrderAdapter = new HistoryOrderAdapter(historyorders,mActivity);
-        recyHistory.setLinearLayout();
+        recyHistory.setLayoutManager(new LinearLayoutManager(mActivity));
         recyHistory.setAdapter(historyOrderAdapter);
+
         getList();
     }
 
@@ -68,7 +75,7 @@ public class HistoryActivity extends BaseFragment {
 
                 .addHeader("X-Requested-With", "XMLHttpReques")
                 .addHeader("Authorization", SharedPreferenceUtils.getToken())
-                .addParams("symbolId",1+"")
+                .addParams("symbolId",id+"")
                 .build()
                 .execute(new ResultModelCallback(mActivity, new ResponseCallBack<OrderBean>() {
                     @Override
@@ -78,7 +85,7 @@ public class HistoryActivity extends BaseFragment {
 
                     @Override
                     public void onResponse(OrderBean response) throws JSONException {
-                       recyHistory.setPullLoadMoreCompleted();
+
                         if (page == 1) {
                             if (linearModle == null) {
                                 return;
@@ -99,7 +106,7 @@ public class HistoryActivity extends BaseFragment {
                                 historyorders.addAll(response.getData());
                                 historyOrderAdapter.notifyDataSetChanged();
                             } else {
-                                recyHistory.setPushRefreshEnable(false);
+
                             }
                         }
                     }

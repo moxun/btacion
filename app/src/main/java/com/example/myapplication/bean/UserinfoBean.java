@@ -165,14 +165,23 @@ public class UserinfoBean {
              * coin : {"coinName":"USDT","minRecharge":"100.00000000","minWithdraw":"100.00000000","maxWithdraw":"10000.00000000","withdrawFree":"1.00000000","contractAddress":"1","coinPrice":"1.00000000","netWork":"ETH","id":1,"coinImg":"5f7db74648d948488b1011148bacf0a9","closeRecharge":"N","closeWithdraw":"N"}
              */
 
-            private String amount;
+            private double amount;
             private CoinBean coin;
+            private double freeze;
 
-            public String getAmount() {
+            public double getFreeze() {
+                return freeze;
+            }
+
+            public void setFreeze(double freeze) {
+                this.freeze = freeze;
+            }
+
+            public double getAmount() {
                 return amount;
             }
 
-            public void setAmount(String amount) {
+            public void setAmount(double amount) {
                 this.amount = amount;
             }
 

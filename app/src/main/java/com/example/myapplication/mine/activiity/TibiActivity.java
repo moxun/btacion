@@ -9,13 +9,13 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.myapplication.Login.ForgrtPwdActivity;
 import com.example.myapplication.R;
 import com.example.myapplication.ZgwApplication;
 import com.example.myapplication.base.BaseActivity;
@@ -27,12 +27,14 @@ import com.example.myapplication.okhttp.OkHttpUtils;
 import com.example.myapplication.okhttp.callback.ResponseCallBack;
 import com.example.myapplication.okhttp.callback.ResultModelCallback;
 import com.example.myapplication.utils.DialogUtil;
+import com.example.myapplication.utils.MoneyUtils;
 import com.example.myapplication.utils.SharedPreferenceUtils;
 import com.example.myapplication.utils.StringUtils;
 import com.example.myapplication.utils.ToastUtils;
 
 import org.json.JSONException;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -74,11 +76,22 @@ public class TibiActivity extends BaseActivity {
     EditText editCode;
     @BindView(R.id.textWithdrawFree)
     TextView textWithdrawFree;
+    @BindView(R.id.right_button)
+    TextView rightButton;
+
+    @BindView(R.id.re)
+    RelativeLayout re;
+    @BindView(R.id.tibi_text_info)
+    TextView tibiTextInfo;
     private Dialog dialog;
     private ArrayList<AddressBean.DataBean> strings;
     private ChooseBiTypeAdapter dilogChooseAdapter;
     private List<AddressBean.DataBean> data;
     private int biid;
+    private String tibi_info;
+    private String zuiduo = ">";
+    private String zuishao = "=";
+    private String bi = "-";
 
     @Override
     protected void initView() {
@@ -88,6 +101,7 @@ public class TibiActivity extends BaseActivity {
     @Override
     protected void initData() {
         toolTitle.setText(getString(R.string.tibi));
+        tibi_info = getString(R.string.tibi_info);
         ChooseidType();
         getAddressList();
     }
@@ -102,7 +116,7 @@ public class TibiActivity extends BaseActivity {
         RecyclerView recy_choose = dialogView.findViewById(R.id.recy_choose);
         recy_choose.setLayoutManager(new LinearLayoutManager(this));
         strings = new ArrayList<>();
-        Log.d("-----", "ChooseidType: " + strings.size());
+
         dilogChooseAdapter = new ChooseBiTypeAdapter(strings);
         recy_choose.setNestedScrollingEnabled(false);
         recy_choose.setAdapter(dilogChooseAdapter);
@@ -114,9 +128,23 @@ public class TibiActivity extends BaseActivity {
                 }
                 dilogChooseAdapter.setDefSelect(pos);
                 biType.setText(type.getCoin().getCoinName());
-                ketongSize.setText(data.get(pos).getBalance().getAmount() + type.getCoin().getCoinName());
-                textWithdrawFree.setText(type.getCoin().getWithdrawFree());
-                biid=type.getCoin().getId();
+
+
+                ketongSize.setText( MoneyUtils.decimalByUp(2, new BigDecimal(data.get(pos).getBalance().getAmount())) + type.getCoin().getCoinName());
+                dongjieSize.setText( MoneyUtils.decimalByUp(2, new BigDecimal(data.get(pos).getCoin().getMinWithdraw())) + type.getCoin().getCoinName());
+                if (type.getCoin().getWithdrawFree() > 0) {
+                    textWithdrawFree.setText(type.getCoin().getWithdrawFree() + "");
+                } else {
+                    textWithdrawFree.setText(type.getCoin().getWithdrawFree() + "%");
+                }
+
+                biid = type.getCoin().getId();
+                String replace = tibi_info.replace(zuiduo, type.getCoin().getMaxWithdraw()).replace(zuishao, type.getCoin().getMinWithdraw()).replace(bi, type.getCoin().getCoinName());
+
+                zuiduo=type.getCoin().getMaxWithdraw();
+                zuishao=type.getCoin().getMinWithdraw();
+                bi=type.getCoin().getCoinName();tibi_info = replace;
+                tibiTextInfo.setText(tibi_info);
                 dialog.dismiss();
             }
         });
@@ -143,16 +171,37 @@ public class TibiActivity extends BaseActivity {
                             data = response.getData();
                             strings.addAll(data);
                             dilogChooseAdapter.notifyDataSetChanged();
-                            CoinsListBean.DataBean coin = response.getData().get(0).getBalance().getCoin();;
+                            CoinsListBean.DataBean coin = response.getData().get(0).getBalance().getCoin();
+                            ;
                             biType.setText(coin.getCoinName());
                             biid = coin.getId();
-                            ketongSize.setText(response.getData().get(0).getBalance().getAmount() + coin.getCoinName());
-                            textWithdrawFree.setText(coin.getWithdrawFree());
 
+                            ketongSize.setText(MoneyUtils.decimalByUp(2, new BigDecimal(response.getData().get(0).getBalance().getAmount())) + coin.getCoinName());
+
+                            if (coin.getWithdrawFree() > 0) {
+                                textWithdrawFree.setText(coin.getWithdrawFree() + "");
+                            } else {
+                                textWithdrawFree.setText(coin.getWithdrawFree() + "%");
+                            }
+                            dongjieSize.setText(MoneyUtils.decimalByUp(2, new BigDecimal(response.getData().get(0).getCoin().getMinWithdraw())) + coin.getCoinName());
+
+                            String replace = tibi_info.replace(zuiduo, coin.getMaxWithdraw()).replace(zuishao, coin.getMinWithdraw()).replace(bi, coin.getCoinName());
+                            zuiduo=coin.getMaxWithdraw();
+                            zuishao=coin.getMinWithdraw();
+                            bi=coin.getCoinName();
+                            tibi_info = replace;
+                            tibiTextInfo.setText(tibi_info);
 
                         }
                     }
                 }));
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // TODO: add setContentView(...) invocation
+        ButterKnife.bind(this);
     }
 
     class TimeCount extends CountDownTimer {
@@ -226,7 +275,7 @@ public class TibiActivity extends BaseActivity {
                 .addHeader("X-Requested-With", "XMLHttpReques")
                 .addHeader("Authorization", SharedPreferenceUtils.getToken())
                 .addParams("amount", editSize.getText().toString())
-                .addParams("coinId", ""+biid)
+                .addParams("coinId", "" + biid)
                 .addParams("address", editAddress.getText().toString())
                 .addParams("code", editCode.getText().toString())
                 .build()

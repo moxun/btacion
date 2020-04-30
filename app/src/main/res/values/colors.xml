@@ -7,7 +7,7 @@
     <color name="colorPriceRed">#54aa22</color>
     <!--价格绿-->
     <color name="colorPriceGreen">#F96A66</color>
-
+    <color name="pop_bg">#55000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="yapq2">#FF913B</color>
     <color name="transparent_db">#E0DBDBDB</color>

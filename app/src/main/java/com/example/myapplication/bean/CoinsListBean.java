@@ -59,7 +59,7 @@ public class CoinsListBean {
         private String minRecharge;
         private String minWithdraw;
         private String maxWithdraw;
-        private String withdrawFree;
+        private double withdrawFree;
         private String contractAddress;
         private String coinPrice;
         private String netWork;
@@ -100,11 +100,11 @@ public class CoinsListBean {
             this.maxWithdraw = maxWithdraw;
         }
 
-        public String getWithdrawFree() {
+        public double getWithdrawFree() {
             return withdrawFree;
         }
 
-        public void setWithdrawFree(String withdrawFree) {
+        public void setWithdrawFree(double withdrawFree) {
             this.withdrawFree = withdrawFree;
         }
 

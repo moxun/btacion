@@ -24,7 +24,7 @@ public class HistoryOrderAdapter extends BaseAdapter<OrderBean.DataBean> {
 
     @Override
     public int getLayoutId() {
-        return R.layout.item_histry;
+        return R.layout.item_yxorser;
     }
 
     @Override
@@ -38,7 +38,7 @@ public class HistoryOrderAdapter extends BaseAdapter<OrderBean.DataBean> {
             holder.setText(R.id.lever,"×"+string.getLeverage());
         holder.setText(R.id.createTime,context.getString(R.string.katime)+string.getCreateTime());
         holder.setText(R.id.canleTime,context.getString(R.string.close_time)+string.getCloseTime());
-        holder.setText(R.id.create_price,string.getOpenPrice()+"");
+        holder.setText(R.id.create_price,MoneyUtils.decimalByUp(2, new BigDecimal(string.getOpenPrice()))+"");
 //        holder.setText(R.id.benjin,string.getAmount()+"");
         TextView viewById = holder.itemView.findViewById(R.id.yingkui);
 
@@ -51,14 +51,14 @@ public class HistoryOrderAdapter extends BaseAdapter<OrderBean.DataBean> {
         }else {
             viewById.setTextColor(Color.parseColor("#F65448"));
         }
-        holder.setText(R.id.end_price,string.getClosePrice()+"");
-        holder.setText(R.id.fee,string.getFee()+"");
+        holder.setText(R.id.end_price,MoneyUtils.decimalByUp(2, new BigDecimal(string.getClosePrice()))+"");
+        holder.setText(R.id.fee,MoneyUtils.decimalByUp(2, new BigDecimal(string.getFee()))+"");
         if(string.getMargin()>0){
             holder.setText(R.id.text_1,"多");
         }else {
             holder.setText(R.id.text_1,"空");
         }
-        holder.setText(R.id.benjin,string.getMargin()+"");
+        holder.setText(R.id.benjin,MoneyUtils.decimalByUp(2, new BigDecimal(string.getMargin()))+"");
 //        if(string.getSide().equals("perpetual")){
 //            holder.setText(R.id.type,"永续合约");
 //        }else {

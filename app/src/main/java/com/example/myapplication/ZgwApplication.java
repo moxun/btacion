@@ -8,22 +8,35 @@ import android.os.Looper;
 
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.WindowManager;
 
 import androidx.multidex.MultiDex;
 
+import com.example.myapplication.bean.LogBean;
+import com.example.myapplication.bean.NoticeBean;
 import com.example.myapplication.okhttp.OkHttpUtils;
+import com.example.myapplication.okhttp.callback.ResponseCallBack;
+import com.example.myapplication.okhttp.callback.ResultModelCallback;
+import com.example.myapplication.utils.ForegroundCallbacks;
+import com.example.myapplication.utils.SharedPreferenceUtils;
 import com.example.myapplication.utils.SharedPreferencesUtils;
+import com.example.myapplication.utils.ToastUtils;
+
 import com.franmontiel.persistentcookiejar.ClearableCookieJar;
 import com.franmontiel.persistentcookiejar.PersistentCookieJar;
 import com.franmontiel.persistentcookiejar.cache.SetCookieCache;
 import com.franmontiel.persistentcookiejar.persistence.SharedPrefsCookiePersistor;
 
 
+
+import org.json.JSONException;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -50,7 +63,7 @@ public class ZgwApplication extends Application {
      * 根据后期服务器图片地址修改，故用此域名访问。
      */
     public static String appPictureUrl="http://vtsbank.oss-cn-hongkong.aliyuncs.com";
-    public static String socket="wss://api.huobi.pro/ws";
+    public static String socket="wss://real.okex.com:8443/ws/v3";
 
     public static String urlimg="http://47.114.103.0:8085/wallet/img/";
     /**
@@ -94,12 +107,13 @@ public class ZgwApplication extends Application {
     public static String TYPE_1DAY="1D";
     public static String TYPE_1WEEK="1W";
     public static String TYPE_1MONTH="1M";
-
+    public static HashMap<String,String> hashMap=new HashMap<>();
     @Override
     protected void attachBaseContext(Context base) {
         super.attachBaseContext(base);
         MultiDex.install (this);
     }
+
 
     @Override
     public void onCreate() {
@@ -161,39 +175,7 @@ public class ZgwApplication extends Application {
                     }
                 });
 
-//        try {
-//            TrustManager[] trustAllCerts = new TrustManager[]{
-//                    new X509TrustManager() {
-//                        @Override
-//                        public void checkClientTrusted(X509Certificate[] chain, String authType) {
-//
-//                        }
-//                        @Override
-//                        public void checkServerTrusted(X509Certificate[] chain, String authType) {
-//
-//                        }
-//                        @Override
-//                        public X509Certificate[] getAcceptedIssuers() {
-//                            return new X509Certificate[]{};
-//                        }
-//                    }
-//            };
-//
-//            SSLContext sslContext = SSLContext.getInstance("SSL");
-//            sslContext.init(null, trustAllCerts, new SecureRandom());
-//            SSLSocketFactory sslSocketFactory = sslContext.getSocketFactory();
-//            builder.sslSocketFactory(sslSocketFactory);
-//            builder.hostnameVerifier(new HostnameVerifier() {
-//                @Override
-//                public boolean verify(String hostname, SSLSession session) {
-//                    return true;
-//                }
-//            });
-//        } catch (NoSuchAlgorithmException e) {
-//            e.printStackTrace();
-//        } catch (KeyManagementException e) {
-//            e.printStackTrace();
-//        }
+
         OkHttpClient okHttpClient = builder
                 .build();
         //初始化okhttp
@@ -201,7 +183,7 @@ public class ZgwApplication extends Application {
 
 
 
-
+        getList();
 
         WindowManager wm = (WindowManager) this.getSystemService(Context.WINDOW_SERVICE);
         DisplayMetrics dm = new DisplayMetrics();
@@ -210,6 +192,23 @@ public class ZgwApplication extends Application {
         height = dm.heightPixels;
     }
 
+    /**
+     * 初始化应用前后台状态监听
+     */
+    private void initAppStatusListener() {
+        ForegroundCallbacks.init(this).addListener(new ForegroundCallbacks.Listener() {
+            @Override
+            public void onBecameForeground() {
+
+
+            }
+
+            @Override
+            public void onBecameBackground() {
+
+            }
+        });
+    }
     public boolean isMainProcess() {
         int pid = android.os.Process.myPid();
         ActivityManager activityManager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
@@ -279,7 +278,38 @@ public class ZgwApplication extends Application {
     {
         return mMainThreadLooper;
     }
+    private void getList() {
 
+        OkHttpUtils.get().url(ZgwApplication.appRequestUrl + "wallet/v1/public/log/type")
+
+                .addHeader("X-Requested-With", "XMLHttpReques")
+                .addHeader("Authorization", SharedPreferenceUtils.getToken())
+
+                .build()
+                .execute(new ResultModelCallback(this, new ResponseCallBack<LogBean>() {
+                    @Override
+                    public void onError(String e) {
+                        ToastUtils.showToast(e);
+                    }
+
+                    @Override
+                    public void onResponse(LogBean response) throws JSONException {
+                        hashMap.put("1",response.getData().get_$1());
+                        hashMap.put("2",response.getData().get_$2());
+                        hashMap.put("3",response.getData().get_$3());
+                        hashMap.put("4",response.getData().get_$4());
+                        hashMap.put("5",response.getData().get_$5());
+                        hashMap.put("6",response.getData().get_$6());
+                        hashMap.put("7",response.getData().get_$7());
+                        hashMap.put("8",response.getData().get_$8());
+                        hashMap.put("9",response.getData().get_$9());
+                        hashMap.put("10",response.getData().get_$10());
+
+
+                    }
+
+                }));
+    }
 
 }
 

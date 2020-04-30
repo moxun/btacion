@@ -73,6 +73,7 @@
                     android:textSize="12sp" />
 
                 <TextView
+                    android:id="@+id/yesterdayAmount"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/text_till"
@@ -129,6 +130,7 @@
                     android:textSize="12sp" />
 
                 <TextView
+                    android:id="@+id/totalAmount"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/text_till1"
@@ -193,6 +195,7 @@
                     android:textSize="12sp" />
 
                 <TextView
+                    android:id="@+id/totalFee"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/text_allsx"
@@ -249,6 +252,7 @@
                     android:textSize="12sp" />
 
                 <TextView
+                    android:id="@+id/childSize"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/text_allsize"

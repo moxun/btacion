@@ -94,17 +94,18 @@
     <string name="keyong">可用</string>
     <string name="copy">复制</string>
     <string name="chongbi_hint">充币提醒</string>
-    <string name="chongbi_hi">1. 该地址仅接受USDT，请勿往该地址转入非USDT资产，包括其相关联资产，否则您的资产将无法找回。\n 2. 最小充值金额：0.0002USDT,小于该金额的充值将无法上账且无法退回。\n 3. 您充值至上述地址后，需要整个网络节点的确认，1次网络确认后到账，6次后方可提币，我们将以短信形式通知您到账情况。</string>
+    <string name="chongbi_hi">1. 该地址仅接受-，请勿往该地址转入非-资产，包括其相关联资产，否则您的资产将无法找回。\n 2. 最小充值金额：=-,小于该金额的充值将无法上账且无法退回。\n 3. 您充值至上述地址后，需要整个网络节点的确认，1次网络确认后到账，6次后方可提币，我们将以短信形式通知您到账情况。</string>
     <string name="zhuanchu_size">转出数量</string>
     <string name="input_tibi_size">请输入您的提币数量</string>
     <string name="ketong">可用：</string>
     <string name="dongjie">冻结:</string>
+    <string name="zuixiaotixian">最小提现:</string>
     <string name="shouxufei">手续费</string>
     <string name="note_pws">短信密码</string>
     <string name="input_notepwd">请输入短信密码</string>
     <string name="get_note">获取短信密码</string>
     <string name="caozuo_hint">操作提醒</string>
-    <string name="tibi_info">1.单笔转出最小币数100USDT，淡入转出最大币数3000USDT \n2.禁止向（USDT）地主充值除（USDT）之外的资产，任何充入（USDT）地址的非（USDT）资产将不可找回。</string>
+    <string name="tibi_info">1.单笔转出最小币数=-，淡入转出最大币数>- \n2.禁止向（-）地主充值除（-）之外的资产，任何充入（-）地址的非（-）资产将不可找回。</string>
     <string name="add_money">充值</string>
     <string name="yinsizhence">隐私政策</string>
     <string name="yhtk">用户条款</string>
@@ -202,10 +203,23 @@
     <string name="cancle">已取消</string>
     <string name="katime">开仓时间</string>
     <string name="close_time">平仓时间</string>
-    <string name="input_bzj">请输入保证金</string>
+    <string name="input_bzj">请选择保证金</string>
     <string name="input_leave">请选择杠杆倍数</string>
     <string name="duocang">多仓</string>
     <string name="input_price">请输入价格</string>
     <string name="xianjiakacang">限价开仓</string>
+    <string name="kekai">可开==张</string>
+    <string name="input_biname">请输入币种名称</string>
+    <string name="zyx">止盈线</string>
+    <string name="zxs">止损线</string>
+    <string name="pc">平仓</string>
+    <string name="yksz">盈亏设置</string>
+    <string name="kcjg">开仓价格(USDT)</string>
+    <string name="bj">本金(USDT)</string>
+    <string name="fdyk">浮动盈亏</string>
+    <string name="dw">点位</string>
+    <string name="hy">合约</string>
+    <string name="djbzj">冻结保证金</string>
+    <string name="yxhy">永续合约</string>
 
 </resources>

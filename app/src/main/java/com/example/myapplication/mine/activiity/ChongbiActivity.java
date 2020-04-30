@@ -1,9 +1,11 @@
 package com.example.myapplication.mine.activiity;
 
 import android.app.Dialog;
+import android.content.ClipData;
+import android.content.ClipboardManager;
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -25,6 +27,7 @@ import com.example.myapplication.okhttp.callback.ResultModelCallback;
 import com.example.myapplication.utils.DialogUtil;
 import com.example.myapplication.utils.Qrutils;
 import com.example.myapplication.utils.SharedPreferenceUtils;
+import com.example.myapplication.utils.ToastUtils;
 
 import org.json.JSONException;
 
@@ -66,10 +69,15 @@ public class ChongbiActivity extends BaseActivity {
 
     @BindView(R.id.chongbi_address)
     TextView chongbiAddress;
+    @BindView(R.id.chongbi)
+    TextView chongbi;
     private Dialog dialog;
     private List<AddressBean.DataBean> data;
     private ArrayList<AddressBean.DataBean> strings;
     private ChooseBiTypeAdapter dilogChooseAdapter;
+    private String chongbihint;
+    private String zuishao = "=";
+    private String bi = "-";
 
     @Override
     protected void initView() {
@@ -79,6 +87,7 @@ public class ChongbiActivity extends BaseActivity {
     @Override
     protected void initData() {
         toolTitle.setText(getString(R.string.topup));
+        chongbihint = getString(R.string.chongbi_hi);
         ChooseidType();
         getAddressList();
     }
@@ -111,7 +120,11 @@ public class ChongbiActivity extends BaseActivity {
                             chongbiAddress.setText(response.getData().get(0).getRechargeAddress().getAddress());
                             Bitmap bitmap = Qrutils.generateBitmap(response.getData().get(0).getRechargeAddress().getAddress(), 1000, 1000);
                             erweima.setImageBitmap(bitmap);
-
+                            String replace = chongbihint.replace(zuishao, coin.getMinRecharge()).replace(bi, coin.getCoinName());
+                            zuishao = coin.getMinRecharge();
+                            bi = coin.getCoinName();
+                            chongbihint = replace;
+                            chongbi.setText(chongbihint);
                         }
                     }
                 }));
@@ -136,6 +149,11 @@ public class ChongbiActivity extends BaseActivity {
                 chongbiAddress.setText(type.getRechargeAddress().getAddress());
                 Bitmap bitmap = Qrutils.generateBitmap(type.getRechargeAddress().getAddress(), 1000, 1000);
                 erweima.setImageBitmap(bitmap);
+                String replace = chongbihint.replace(zuishao, type.getCoin().getMinRecharge()).replace(bi, type.getCoin().getCoinName());
+                zuishao = type.getCoin().getMinRecharge();
+                bi = type.getCoin().getCoinName();
+                chongbihint = replace;
+                chongbi.setText(chongbihint);
                 dialog.dismiss();
             }
         });
@@ -153,18 +171,21 @@ public class ChongbiActivity extends BaseActivity {
                 dialog.show();
                 break;
             case R.id.copy:
+                ClipboardManager cm;
+                ClipData mClipData;
+//获取剪贴板管理器：
+                cm = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
+// 创建普通字符型ClipData
+                mClipData = ClipData.newPlainText("Label", chongbiAddress.getText().toString());
+// 将ClipData内容放到系统剪贴板里。
+                cm.setPrimaryClip(mClipData);
+                ToastUtils.showToast(getString(R.string.copy_success));
                 break;
             case R.id.next_do:
                 break;
         }
     }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
-        ButterKnife.bind(this);
-    }
 
     @Override
     protected int getLayoutId() {
